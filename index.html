@@ -6,10 +6,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>15K Celebration 💖</title>
 
+<!-- GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+
 <style>
 body {
     margin: 0;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Poppins', sans-serif;
     overflow: hidden;
     background: black;
 }
@@ -28,6 +31,7 @@ body {
     text-align: center;
     color: white;
     transition: 0.7s;
+    padding: 20px;
 }
 
 .active { left: 0; }
@@ -62,7 +66,7 @@ img {
                  0 0 30px #ff4da6;
 }
 
-/* Button */
+/* Buttons */
 button {
     margin-top: 25px;
     padding: 12px 30px;
@@ -72,14 +76,41 @@ button {
     background: #ff4da6;
     color: white;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 button:hover {
+    transform: scale(1.1);
     background: #ff1a8c;
 }
 
-h1 { font-size: 32px; }
-p { font-size: 18px; width: 85%; }
+/* About Heading */
+.about-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+/* About Text */
+.about-text {
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 600px;
+}
+
+/* Video */
+.video-box {
+    margin-top: 25px;
+    width: 90%;
+    max-width: 400px;
+}
+
+iframe {
+    width: 100%;
+    height: 250px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px #ff4da6;
+}
 
 </style>
 </head>
@@ -104,25 +135,48 @@ p { font-size: 18px; width: 85%; }
 <!-- SLIDE 2 -->
 <div id="slide2" class="slide">
 
-    <h1>About Her 💫</h1>
+    <div class="about-title">About Her 💫</div>
 
-    <p>
-        She is not just beautiful, she is inspiring ✨ <br><br>
-        Always spreading smiles and positivity 💕 <br><br>
-        A soul that shines brighter every day 🌸
-    </p>
+    <div class="about-text">
 
-    <!-- DIRECT VIDEO -->
-    <div style="width:90%; max-width:400px; margin-top:20px;">
+        She comes from the heart of heaven Nepal 🇳🇵 <br><br>
+        Ra usko naam ho Dristi. <br><br>
 
-        <iframe 
-            src="https://drive.google.com/file/d/1FgBmdclticKaQJ6oGsbK32svm5KJyQMk/preview"
-            width="100%" 
-            height="250" 
-            allow="autoplay"
-            style="border-radius:15px; box-shadow:0 0 20px #ff4da6;">
-        </iframe>
+        Ek aisi girl jo bachpan dekhi nai sapana dekhthyo…  
+        sirf 5 barsa ko umar ma usle decide garyo ki she wants to become a doctor,  
+        ra tespachi dekhi woh afno dream lai quietly, full dedication sanga follow gardai cha. <br><br>
 
+        Woh sirf kind matra hoina, usko heart sachai golden cha  
+        yesto mann jo sabko care garcha, even jab koi notice pani gardaina. <br><br>
+
+        Kabhi-kabhi usko efforts words ma express hudaina, tara clearly feel huncha. <br><br>
+
+        Har topper ko pani weakness huncha,  
+        ra usko lagi tyo ho math 😄 <br>
+        But chemistry sanga usko connection ali different cha. <br><br>
+
+        Usko voice loud hoina, ek calm feeling jasto ho  
+        jasko sunera mann halka huncha. <br><br>
+
+        Ra usko sapana guitar sikne pani cha. <br><br>
+
+        Yo simple, innocent soul “Sleeping Queen” ko naam le pani chincha  
+        jo kahile-kahi sano kura ma tension lincha,  
+        tara tyo nai uslai ajhai real ra human banauncha. <br><br>
+
+        Usko life ma ek loving brother ra adorable pookie parents pani chan  
+        jasko presence le usko world complete jasto lagcha. <br><br>
+
+        Ra sachai  
+        she is not just someone you meet in life  
+        she is someone who stays in your memory  
+        ra ek choti basyo vane  
+        sajilai kahile pani birsina sakinna.
+
+    </div>
+
+    <div class="video-box">
+        <iframe src="https://drive.google.com/file/d/1FgBmdclticKaQJ6oGsbK32svm5KJyQMk/preview"></iframe>
     </div>
 
     <button onclick="nextSlide(2)">Next ➡️</button>
