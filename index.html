@@ -70,12 +70,17 @@ button {
     font-size: 18px;
     background: #ff4da6;
     color: white;
+    cursor: pointer;
 }
 
-/* Split layout */
+button:hover {
+    background: #ff1a8c;
+}
+
+/* Layout */
 .split-container {
     display: flex;
-    flex-direction: column; /* mobile friendly */
+    flex-direction: column;
     width: 90%;
 }
 
@@ -123,6 +128,7 @@ p { font-size: 18px; }
 
     <div class="split-container">
 
+        <!-- TEXT -->
         <div class="text-box">
             <h1>About Her 💫</h1>
             <p>
@@ -132,9 +138,11 @@ p { font-size: 18px; }
             </p>
         </div>
 
+        <!-- VIDEO (iPhone FIXED) -->
         <div class="video-box">
-            <video autoplay loop muted controls playsinline>
+            <video controls playsinline webkit-playsinline>
                 <source src="video.mp4" type="video/mp4">
+                Your browser does not support video.
             </video>
         </div>
 
