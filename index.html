@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>15K Celebration 💖</title>
+<title>15K Celebration</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 
@@ -50,11 +50,18 @@ canvas {
     box-shadow: 0 0 40px rgba(255,77,166,0.6);
 }
 
-/* NAME */
+/* PREMIUM NAME */
 .name {
-    font-size: 28px;
-    color: #ff4da6;
-    margin: 12px;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: 1px;
+
+    background: linear-gradient(90deg, #ff4da6, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow: 0 0 20px rgba(255, 77, 166, 0.4);
+    margin-top: 12px;
 }
 
 /* JOURNEY */
@@ -143,7 +150,7 @@ button:hover {
 <div id="slide1" class="slide active">
 
 <img src="photo.jpeg" class="profile">
-<div class="name">Dristi 💖</div>
+<div class="name">Dristi</div>
 
 <div class="journey">
 <div class="box">Jan 2026 — Account Created</div>
@@ -170,7 +177,7 @@ button:hover {
 </div>
 
 <script>
-// FULL ORIGINAL TEXT
+// FULL TEXT
 const text = `She comes from the heart of heaven Nepal 🇳🇵
 Ra usko naam ho Dristi.
 Ek aisi girl jo bachpan dekhi nai sapana dekhthyo… sirf 5 barsa ko umar ma usle decide garyo ki she wants to become a doctor, ra tespachi dekhi woh afno dream lai quietly, full dedication sanga follow gardai cha.
@@ -193,7 +200,6 @@ function typeWriter() {
     }
 }
 
-// NAV
 function nextSlide(){
     document.getElementById("slide1").classList.remove("active");
     document.getElementById("slide2").classList.add("active");
@@ -204,7 +210,6 @@ function goBack(){
     location.reload();
 }
 
-// CONFETTI
 function celebrate(){
     confetti({
         particleCount: 220,
@@ -212,7 +217,7 @@ function celebrate(){
     });
 }
 
-// PARTICLES
+/* PARTICLES */
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
