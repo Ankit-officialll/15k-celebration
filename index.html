@@ -36,11 +36,21 @@ body {
 #slide3 { background: #111; }
 
 img {
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     border-radius: 50%;
-    border: 4px solid white;
     object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 0 25px #ff4da6;
+}
+
+/* Name styling */
+.name {
+    font-size: 28px;
+    margin-top: 15px;
+    color: #ff4da6;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 h1 { font-size: 40px; margin: 15px 0; }
@@ -76,8 +86,10 @@ canvas {
 
 <!-- SLIDE 1 -->
 <div id="slide1" class="slide active">
-    <img src="PHOTO_LINK">
-    <h1>[Her Name] 💖</h1>
+    <img src="https://raw.githubusercontent.com/Ankit-official/15k-celebration/refs/heads/main/WhatsApp%20Image%202026-03-19%20at%2015.48.40.jpeg">
+    
+    <div class="name">Dristi 💖</div>
+
     <p id="typeText"></p>
     <button onclick="nextSlide(1)">Start ➡️</button>
 </div>
@@ -109,13 +121,11 @@ canvas {
 </audio>
 
 <script>
-// Slide transition
 function nextSlide(n) {
     document.getElementById("slide" + n).classList.remove("active");
     document.getElementById("slide" + (n + 1)).classList.add("active");
 }
 
-// Typing effect
 let text = "Something special for you 💖";
 let i = 0;
 
@@ -128,7 +138,6 @@ function typeEffect() {
 }
 typeEffect();
 
-// Confetti
 const canvas = document.getElementById("confetti");
 const ctx = canvas.getContext("2d");
 
@@ -141,8 +150,7 @@ for (let i = 0; i < 120; i++) {
     particles.push({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height,
-        r: Math.random() * 5 + 2,
-        d: Math.random() * 100
+        r: Math.random() * 5 + 2
     });
 }
 
@@ -172,7 +180,6 @@ function update() {
 
 setInterval(draw, 30);
 
-// Final celebration
 function celebrate() {
     document.getElementById("music").play();
     alert("So proud of you 💖\nKeep growing 🚀✨");
