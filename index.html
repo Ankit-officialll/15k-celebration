@@ -29,11 +29,8 @@ body {
     transition: 0.7s;
 }
 
-.active {
-    left: 0;
-}
+.active { left: 0; }
 
-/* Backgrounds */
 #slide2 { background: linear-gradient(135deg, #ff758c, #ff7eb3); }
 #slide3 { background: #111; }
 
@@ -73,38 +70,33 @@ button {
     font-size: 18px;
     background: #ff4da6;
     color: white;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #ff1a8c;
 }
 
 /* Split layout */
 .split-container {
     display: flex;
+    flex-direction: column; /* mobile friendly */
     width: 90%;
-    align-items: center;
-    justify-content: space-between;
 }
 
 .text-box {
-    width: 45%;
     text-align: left;
+    margin-bottom: 20px;
 }
 
 .video-box {
-    width: 45%;
+    width: 100%;
 }
 
+/* Video */
 video {
     width: 100%;
     border-radius: 15px;
     box-shadow: 0 0 20px #ff4da6;
 }
 
-h1 { font-size: 40px; }
-p { font-size: 20px; }
+h1 { font-size: 32px; }
+p { font-size: 18px; }
 
 </style>
 </head>
@@ -114,7 +106,7 @@ p { font-size: 20px; }
 <!-- SLIDE 1 -->
 <div id="slide1" class="slide active">
 
-    <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/photo.jpeg">
+    <img src="photo.jpeg">
 
     <div class="name">Dristi 💖</div>
 
@@ -131,7 +123,6 @@ p { font-size: 20px; }
 
     <div class="split-container">
 
-        <!-- TEXT -->
         <div class="text-box">
             <h1>About Her 💫</h1>
             <p>
@@ -141,10 +132,9 @@ p { font-size: 20px; }
             </p>
         </div>
 
-        <!-- VIDEO -->
         <div class="video-box">
-            <video autoplay loop muted controls>
-                <source src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/video.mp4" type="video/mp4">
+            <video autoplay loop muted controls playsinline>
+                <source src="video.mp4" type="video/mp4">
             </video>
         </div>
 
