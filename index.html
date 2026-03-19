@@ -44,16 +44,14 @@ img {
     box-shadow: 0 0 25px #ff4da6;
 }
 
-/* Name styling */
 .name {
     font-size: 28px;
     margin-top: 15px;
     color: #ff4da6;
     font-weight: bold;
-    letter-spacing: 1px;
 }
 
-h1 { font-size: 40px; margin: 15px 0; }
+h1 { font-size: 40px; }
 p { font-size: 20px; max-width: 80%; }
 
 button {
@@ -67,15 +65,10 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background: #ff1a8c;
-}
-
 canvas {
     position: fixed;
     top: 0;
     left: 0;
-    pointer-events: none;
 }
 </style>
 </head>
@@ -86,10 +79,8 @@ canvas {
 
 <!-- SLIDE 1 -->
 <div id="slide1" class="slide active">
-    <img src="https://raw.githubusercontent.com/Ankit-official/15k-celebration/refs/heads/main/WhatsApp%20Image%202026-03-19%20at%2015.48.40.jpeg">
-    
+    <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/WhatsApp%20Image%202026-03-19%20at%2015.48.40.jpeg">
     <div class="name">Dristi 💖</div>
-
     <p id="typeText"></p>
     <button onclick="nextSlide(1)">Start ➡️</button>
 </div>
@@ -116,10 +107,6 @@ canvas {
     <button onclick="celebrate()">Celebrate 🎉</button>
 </div>
 
-<audio id="music" loop>
-    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
-</audio>
-
 <script>
 function nextSlide(n) {
     document.getElementById("slide" + n).classList.remove("active");
@@ -138,50 +125,7 @@ function typeEffect() {
 }
 typeEffect();
 
-const canvas = document.getElementById("confetti");
-const ctx = canvas.getContext("2d");
-
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-let particles = [];
-
-for (let i = 0; i < 120; i++) {
-    particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 5 + 2
-    });
-}
-
-function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "pink";
-    ctx.beginPath();
-
-    particles.forEach(p => {
-        ctx.moveTo(p.x, p.y);
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-    });
-
-    ctx.fill();
-    update();
-}
-
-function update() {
-    particles.forEach(p => {
-        p.y += 2;
-        if (p.y > canvas.height) {
-            p.y = 0;
-            p.x = Math.random() * canvas.width;
-        }
-    });
-}
-
-setInterval(draw, 30);
-
 function celebrate() {
-    document.getElementById("music").play();
     alert("So proud of you 💖\nKeep growing 🚀✨");
 }
 </script>
