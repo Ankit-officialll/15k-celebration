@@ -1,1 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15K Celebration 💖</title>
 
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    background: black;
+}
+
+.slide {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: white;
+    transition: 0.7s;
+}
+
+.active {
+    left: 0;
+}
+
+#slide2 { background: linear-gradient(135deg, #ff758c, #ff7eb3); }
+#slide3 { background: #111; }
+
+img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    border: 4px solid white;
+    object-fit: cover;
+}
+
+h1 { font-size: 40px; margin: 15px 0; }
+p { font-size: 20px; max-width: 80%; }
+
+button {
+    margin-top: 25px;
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: none;
+    font-size: 18px;
+    background: #ff4da6;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff1a8c;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="confetti"></canvas>
+
+<!-- SLIDE 1 -->
+<div id="slide1" class="slide active">
+    <img src="PHOTO_LINK">
+    <h1>[Her Name] 💖</h1>
+    <p id="typeText"></p>
+    <button onclick="nextSlide(1)">Start ➡️</button>
+</div>
+
+<!-- SLIDE 2 -->
+<div id="slide2" class="slide">
+    <h1>About Her 💫</h1>
+    <p>
+        She is not just beautiful, she is inspiring ✨ <br><br>
+        Always spreading smiles and positivity 💕 <br><br>
+        A soul that shines brighter every day 🌸
+    </p>
+    <button onclick="nextSlide(2)">Next ➡️</button>
+</div>
+
+<!-- SLIDE 3 -->
+<div id="slide3" class="slide">
+    <h1>🎉 15K Followers 🎉</h1>
+    <p>
+        From zero to 15,000 followers 🚀 <br><br>
+        Your journey is powerful 💖 <br><br>
+        This is just the beginning ✨
+    </p>
+    <button onclick="celebrate()">Celebrate 🎉</button>
+</div>
+
+<audio id="music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">
+</audio>
+
+<script>
+// Slide transition
+function nextSlide(n) {
+    document.getElementById("slide" + n).classList.remove("active");
+    document.getElementById("slide" + (n + 1)).classList.add("active");
+}
+
+// Typing effect
+let text = "Something special for you 💖";
+let i = 0;
+
+function typeEffect() {
+    if (i < text.length) {
+        document.getElementById("typeText").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 50);
+    }
+}
+typeEffect();
+
+// Confetti
+const canvas = document.getElementById("confetti");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for (let i = 0; i < 120; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 5 + 2,
+        d: Math.random() * 100
+    });
+}
+
+function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "pink";
+    ctx.beginPath();
+
+    particles.forEach(p => {
+        ctx.moveTo(p.x, p.y);
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    });
+
+    ctx.fill();
+    update();
+}
+
+function update() {
+    particles.forEach(p => {
+        p.y += 2;
+        if (p.y > canvas.height) {
+            p.y = 0;
+            p.x = Math.random() * canvas.width;
+        }
+    });
+}
+
+setInterval(draw, 30);
+
+// Final celebration
+function celebrate() {
+    document.getElementById("music").play();
+    alert("So proud of you 💖\nKeep growing 🚀✨");
+}
+</script>
+
+</body>
+</html>
