@@ -13,6 +13,7 @@ body {
     background: black;
 }
 
+/* Slides */
 .slide {
     width: 100%;
     height: 100vh;
@@ -35,28 +36,38 @@ body {
 #slide2 { background: linear-gradient(135deg, #ff758c, #ff7eb3); }
 #slide3 { background: #111; }
 
+/* Bigger Image */
 img {
-    width: 220px;
-    height: 220px;
+    width: 260px;
+    height: 260px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid #fff;
-    box-shadow: 0 0 25px #ff4da6;
+    border: 5px solid #fff;
+    box-shadow: 0 0 40px #ff4da6;
 }
 
+/* Name */
 .name {
-    font-size: 28px;
+    font-size: 32px;
     margin-top: 15px;
     color: #ff4da6;
     font-weight: bold;
 }
 
-h1 { font-size: 40px; }
-p { font-size: 20px; max-width: 80%; }
+/* Glowing Text */
+.glow {
+    font-size: 20px;
+    margin-top: 10px;
+    color: white;
+    text-shadow: 0 0 10px #ff4da6,
+                 0 0 20px #ff4da6,
+                 0 0 30px #ff4da6;
+}
 
+/* Button */
 button {
     margin-top: 25px;
-    padding: 12px 25px;
+    padding: 12px 30px;
     border-radius: 30px;
     border: none;
     font-size: 18px;
@@ -65,24 +76,31 @@ button {
     cursor: pointer;
 }
 
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
+button:hover {
+    background: #ff1a8c;
 }
+
+h1 { font-size: 40px; }
+p { font-size: 20px; max-width: 80%; }
+
 </style>
 </head>
 
 <body>
 
-<canvas id="confetti"></canvas>
-
 <!-- SLIDE 1 -->
 <div id="slide1" class="slide active">
-    <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/WhatsApp%20Image%202026-03-19%20at%2015.48.40.jpeg">
+
+    <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/photo.jpeg">
+
     <div class="name">Dristi 💖</div>
-    <p id="typeText"></p>
-    <button onclick="nextSlide(1)">Start ➡️</button>
+
+    <div class="glow">
+        Congratulations for hitting 15K Followers 🎉
+    </div>
+
+    <button onclick="nextSlide(1)">Next ➡️</button>
+
 </div>
 
 <!-- SLIDE 2 -->
@@ -112,18 +130,6 @@ function nextSlide(n) {
     document.getElementById("slide" + n).classList.remove("active");
     document.getElementById("slide" + (n + 1)).classList.add("active");
 }
-
-let text = "Something special for you 💖";
-let i = 0;
-
-function typeEffect() {
-    if (i < text.length) {
-        document.getElementById("typeText").innerHTML += text.charAt(i);
-        i++;
-        setTimeout(typeEffect, 50);
-    }
-}
-typeEffect();
 
 function celebrate() {
     alert("So proud of you 💖\nKeep growing 🚀✨");
