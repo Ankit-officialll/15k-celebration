@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +16,14 @@ body {
     overflow: hidden;
 }
 
+/* PARTICLES */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
 /* INTRO */
 #intro {
     position: fixed;
@@ -25,8 +34,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 22px;
-    z-index: 10;
+    font-size: 26px;
     animation: fadeOut 3s forwards 3s;
 }
 
@@ -37,54 +45,46 @@ body {
 /* SLIDES */
 .slide {
     width: 100%;
-    min-height: 100vh;
-    padding: 20px;
+    height: 100vh;
     display: none;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    justify-content: center;
     color: white;
-    animation: fadeSlide 0.7s ease;
+    animation: slideIn 0.8s ease;
 }
 
 .active { display: flex; }
 
-@keyframes fadeSlide {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 1; transform: translateX(0); }
+@keyframes slideIn {
+    from { opacity: 0; transform: scale(1.1); }
+    to { opacity: 1; transform: scale(1); }
 }
 
 /* PROFILE */
 .profile {
-    width: 140px;
-    height: 140px;
+    width: 150px;
     border-radius: 50%;
-    border: 4px solid white;
-    box-shadow: 0 0 25px #ff4da6;
+    box-shadow: 0 0 30px #ff4da6;
 }
 
 /* NAME */
 .name {
-    font-size: 26px;
+    font-size: 28px;
     color: #ff4da6;
-    margin-top: 10px;
+    margin: 10px;
 }
 
-/* BOX */
+/* JOURNEY */
 .box {
-    margin: 5px;
-    padding: 6px 10px;
-    background: rgba(0,0,0,0.5);
-    border-radius: 8px;
-    opacity: 0;
-    animation: show 0.5s forwards;
+    margin: 4px;
+    padding: 8px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
 }
 
-@keyframes show {
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* GLOW */
+/* 15K */
 .highlight {
     color: gold;
     animation: glow 1.5s infinite;
@@ -92,47 +92,37 @@ body {
 
 @keyframes glow {
     0% { box-shadow: 0 0 5px gold; }
-    50% { box-shadow: 0 0 25px gold; }
+    50% { box-shadow: 0 0 30px gold; }
     100% { box-shadow: 0 0 5px gold; }
-}
-
-/* ABOUT BG */
-.about-bg {
-    background: url("about-bg.jpg") center/cover;
 }
 
 /* TYPEWRITER */
 .typewriter {
     width: 80%;
-    max-width: 400px;
-    color: #3b2f2f;
+    max-width: 450px;
     font-family: 'Playfair Display', serif;
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 15px;
     background: rgba(255,255,255,0.1);
     padding: 20px;
-    border-radius: 12px;
-    backdrop-filter: blur(3px);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
 }
 
 /* BUTTON */
 button {
     margin-top: 20px;
-    padding: 10px;
-    border-radius: 20px;
+    padding: 10px 20px;
+    border-radius: 30px;
     border: none;
     background: #ff4da6;
     color: white;
 }
 
-/* MUSIC BUTTON */
+/* MUSIC */
 .music-btn {
     position: fixed;
-    bottom: 15px;
-    right: 15px;
-    background: #ff4da6;
-    padding: 10px;
-    border-radius: 50%;
+    bottom: 20px;
+    right: 20px;
 }
 
 /* MOBILE */
@@ -144,17 +134,16 @@ button {
 
 <body>
 
-<!-- INTRO -->
-<div id="intro">A small girl with big dreams… 💫</div>
+<canvas id="particles"></canvas>
 
-<!-- AUDIO -->
+<div id="intro">A story you’ll never forget… 💫</div>
+
 <audio id="bgMusic" loop>
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <button class="music-btn" onclick="playMusic()">🎵</button>
 
-<!-- CONFETTI -->
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <!-- SLIDE 1 -->
@@ -171,16 +160,14 @@ button {
 <div class="box">22 Feb — 8K Followers</div>
 <div class="box">12 Mar — 10K Followers</div>
 
-<div class="box highlight" onclick="celebrate()">
-21 March 2026 — 15K 👑
-</div>
+<div class="box highlight" onclick="celebrate()">21 March 2026 — 15K 👑</div>
 
 <button onclick="nextSlide()">Next ➡️</button>
 
 </div>
 
 <!-- SLIDE 2 -->
-<div id="slide2" class="slide about-bg">
+<div id="slide2" class="slide">
 
 <div class="typewriter" id="text"></div>
 
@@ -189,6 +176,7 @@ button {
 </div>
 
 <script>
+// TYPEWRITER
 const text = `She comes from the heart of heaven Nepal 🇳🇵
 Ra usko naam ho Dristi.
 She follows her dream of becoming a doctor.
@@ -200,30 +188,69 @@ function typeWriter() {
     if (i < text.length) {
         document.getElementById("text").innerHTML += text.charAt(i);
         i++;
-        setTimeout(typeWriter, 25);
+        setTimeout(typeWriter, 20);
     }
 }
 
+// NAV
 function nextSlide(){
     document.getElementById("slide1").classList.remove("active");
     document.getElementById("slide2").classList.add("active");
-    setTimeout(typeWriter, 300);
+    setTimeout(typeWriter, 500);
 }
 
 function goBack(){
     location.reload();
 }
 
+// CONFETTI
 function celebrate(){
     confetti({
-        particleCount:200,
-        spread:120
+        particleCount: 200,
+        spread: 120
     });
 }
 
+// MUSIC
 function playMusic(){
     document.getElementById("bgMusic").play();
 }
+
+// PARTICLES
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+for(let i=0;i<50;i++){
+    particles.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*2,
+        d:Math.random()*1
+    });
+}
+
+function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="rgba(255,255,255,0.5)";
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fill();
+    });
+    update();
+}
+
+function update(){
+    particles.forEach(p=>{
+        p.y+=p.d;
+        if(p.y>canvas.height) p.y=0;
+    });
+}
+
+setInterval(draw,33);
 </script>
 
 </body>
