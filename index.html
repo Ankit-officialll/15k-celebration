@@ -13,7 +13,6 @@ body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
     background: black;
-    overflow-x: hidden;
 }
 
 /* SLIDES */
@@ -26,13 +25,20 @@ body {
     align-items: center;
     text-align: center;
     color: white;
+    animation: fadeSlide 0.6s ease;
 }
 
 .active { display: flex; }
 
+/* SLIDE ANIMATION */
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateX(40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* SLIDE 2 BG */
 #slide2 {
     background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    overflow-y: auto;
 }
 
 /* PROFILE */
@@ -61,84 +67,109 @@ body {
 }
 
 /* FUNNEL */
-.funnel { margin-top: 15px; }
-
 .box {
     margin: 6px auto;
     padding: 7px 12px;
-    max-width: 90%;
     font-size: 12.5px;
     border-radius: 10px;
     background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(6px);
     box-shadow: 0 0 8px #ff4da6;
 }
 
-.b1 { margin-left: 0; }
-.b2 { margin-left: 5px; }
-.b3 { margin-left: 10px; }
-.b4 { margin-left: 15px; }
-.b5 { margin-left: 20px; }
-.b6 { margin-left: 25px; }
-.b7 { margin-left: 30px; }
-.b8 { margin-left: 35px; }
-
 .highlight {
-    background: rgba(255,215,0,0.2);
-    box-shadow: 0 0 12px gold;
+    animation: glow 1.5s infinite;
 }
 
-/* CONGRATS */
-.congrats {
-    margin-top: 10px;
-    font-size: 13px;
-    color: gold;
+@keyframes glow {
+    0% { box-shadow: 0 0 5px gold; }
+    50% { box-shadow: 0 0 20px gold; }
+    100% { box-shadow: 0 0 5px gold; }
 }
 
 /* BUTTON */
 button {
-    margin-top: 12px;
+    margin-top: 15px;
     padding: 10px;
-    width: 85%;
-    max-width: 220px;
+    width: 200px;
     border-radius: 20px;
     border: none;
     background: #ff4da6;
     color: white;
 }
 
-/* ABOUT */
+/* ABOUT TITLE */
 .about-title {
     font-family: 'Playfair Display', serif;
     font-size: 22px;
+    margin-bottom: 10px;
 }
 
+/* FLEX LAYOUT */
+.about-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    max-width: 900px;
+}
+
+/* TEXT LEFT */
 .about-text {
+    flex: 1;
     font-size: 13px;
     line-height: 1.5;
-    max-width: 95%;
-    padding: 12px;
-    margin: 10px auto;
+    padding: 15px;
     background: rgba(40,40,40,0.7);
     border-radius: 12px;
     text-align: left;
 }
 
-/* CLEAN PARAGRAPH SPACING */
+/* TEXT ANIMATION */
 .about-text p {
-    margin: 8px 0;
+    opacity: 0;
+    animation: fadeText 0.6s ease forwards;
 }
 
-/* VIDEO */
-.video-box {
-    margin-top: 20px;
-    width: 95%;
+.about-text p:nth-child(1){animation-delay:0.2s;}
+.about-text p:nth-child(2){animation-delay:0.4s;}
+.about-text p:nth-child(3){animation-delay:0.6s;}
+.about-text p:nth-child(4){animation-delay:0.8s;}
+.about-text p:nth-child(5){animation-delay:1s;}
+.about-text p:nth-child(6){animation-delay:1.2s;}
+.about-text p:nth-child(7){animation-delay:1.4s;}
+.about-text p:nth-child(8){animation-delay:1.6s;}
+.about-text p:nth-child(9){animation-delay:1.8s;}
+.about-text p:nth-child(10){animation-delay:2s;}
+.about-text p:nth-child(11){animation-delay:2.2s;}
+
+@keyframes fadeText {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-iframe {
-    width: 100%;
-    height: 190px;
-    border-radius: 12px;
+/* VIDEO RIGHT */
+.video-box video {
+    width: 260px;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0 0 15px #ff4da6;
+}
+
+/* MOBILE FIX */
+@media (max-width: 768px) {
+    .about-container {
+        flex-direction: column;
+    }
+
+    .video-box video {
+        width: 90%;
+        height: 350px;
+    }
+
+    .about-text {
+        width: 90%;
+    }
 }
 </style>
 </head>
@@ -154,20 +185,14 @@ iframe {
 
     <h2 class="journey-title">Milestones of Her Journey ✨</h2>
 
-    <div class="funnel">
-        <div class="box b1">Jan 2026 — Account Created</div>
-        <div class="box b2">14 Jan — 500 Followers</div>
-        <div class="box b3">15 Jan — 1K Followers</div>
-        <div class="box b4">26 Jan — 4K Followers</div>
-        <div class="box b5">11 Feb — 6K Followers</div>
-        <div class="box b6">22 Feb — 8K Followers</div>
-        <div class="box b7">12 Mar — 10K Followers</div>
-        <div class="box b8 highlight">21 Mar — 15K Followers 👑</div>
-    </div>
-
-    <div class="congrats">
-        Congratulations for reaching 15K Instagram followers 🎉
-    </div>
+    <div class="box">Jan 2026 — Account Created</div>
+    <div class="box">14 Jan — 500 Followers</div>
+    <div class="box">15 Jan — 1K Followers</div>
+    <div class="box">26 Jan — 4K Followers</div>
+    <div class="box">11 Feb — 6K Followers</div>
+    <div class="box">22 Feb — 8K Followers</div>
+    <div class="box">12 Mar — 10K Followers</div>
+    <div class="box highlight">21 Mar — 15K Followers 👑</div>
 
     <button onclick="nextSlide(1)">Next ➡️</button>
 
@@ -176,24 +201,32 @@ iframe {
 <!-- SLIDE 2 -->
 <div id="slide2" class="slide">
 
-    <div class="about-title">About Her 💫</div>
+    <div class="about-title">About Her ✨</div>
 
-    <div class="about-text">
-        <p>She comes from the heart of heaven Nepal 🇳🇵</p>
-        <p>Ra usko naam ho Dristi.</p>
-        <p>Ek aisi girl jo bachpan dekhi nai sapana dekhthyo… she wants to become a doctor.</p>
-        <p>Woh sirf kind matra hoina, usko heart golden cha.</p>
-        <p>Har topper ko pani weakness huncha — math 😄</p>
-        <p>But chemistry sanga usko connection ali different cha.</p>
-        <p>Usko voice ek calm feeling jasto ho.</p>
-        <p>Ra usko sapana guitar sikne pani cha.</p>
-        <p>“Sleeping Queen” ko naam le pani chincha.</p>
-        <p>Usko life ma loving brother ra adorable parents pani chan.</p>
-        <p>She is someone you never really forget.</p>
-    </div>
+    <div class="about-container">
 
-    <div class="video-box">
-        <iframe src="https://drive.google.com/file/d/1FgBmdclticKaQJ6oGsbK32svm5KJyQMk/preview"></iframe>
+        <!-- TEXT LEFT -->
+        <div class="about-text">
+            <p>She comes from the heart of heaven Nepal 🇳🇵</p>
+            <p>Ra usko naam ho Dristi.</p>
+            <p>Ek aisi girl jo bachpan dekhi nai sapana dekhthyo… she wants to become a doctor.</p>
+            <p>Woh sirf kind matra hoina, usko heart golden cha.</p>
+            <p>Har topper ko pani weakness huncha — math 😄</p>
+            <p>But chemistry sanga usko connection ali different cha.</p>
+            <p>Usko voice ek calm feeling jasto ho.</p>
+            <p>Ra usko sapana guitar sikne pani cha.</p>
+            <p>“Sleeping Queen” ko naam le pani chincha.</p>
+            <p>Usko life ma loving brother ra adorable parents pani chan.</p>
+            <p>She is someone you never really forget.</p>
+        </div>
+
+        <!-- VIDEO RIGHT -->
+        <div class="video-box">
+            <video autoplay muted loop playsinline controls>
+                <source src="YOUR_VIDEO_LINK.mp4" type="video/mp4">
+            </video>
+        </div>
+
     </div>
 
     <button onclick="goBack()">⬅ Back</button>
