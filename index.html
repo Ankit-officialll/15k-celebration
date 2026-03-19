@@ -12,7 +12,7 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: black;
+    background: radial-gradient(circle at top, #111, #000);
     overflow: hidden;
 }
 
@@ -24,24 +24,6 @@ canvas {
     z-index: -1;
 }
 
-/* INTRO */
-#intro {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background: black;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 26px;
-    animation: fadeOut 3s forwards 3s;
-}
-
-@keyframes fadeOut {
-    to { opacity: 0; visibility: hidden; }
-}
-
 /* SLIDES */
 .slide {
     width: 100%;
@@ -51,78 +33,97 @@ canvas {
     align-items: center;
     justify-content: center;
     color: white;
-    animation: slideIn 0.8s ease;
+    animation: fadeIn 0.8s ease;
 }
 
 .active { display: flex; }
 
-@keyframes slideIn {
-    from { opacity: 0; transform: scale(1.1); }
-    to { opacity: 1; transform: scale(1); }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* PROFILE */
 .profile {
     width: 150px;
     border-radius: 50%;
-    box-shadow: 0 0 30px #ff4da6;
+    box-shadow: 0 0 40px rgba(255,77,166,0.6);
 }
 
 /* NAME */
 .name {
     font-size: 28px;
     color: #ff4da6;
-    margin: 10px;
+    margin: 12px;
 }
 
 /* JOURNEY */
+.journey {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .box {
-    margin: 4px;
-    padding: 8px;
-    background: rgba(0,0,0,0.6);
-    border-radius: 10px;
-    backdrop-filter: blur(5px);
+    padding: 10px 14px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 13px;
+    transition: 0.3s;
+}
+
+.box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255,77,166,0.6);
 }
 
 /* 15K */
 .highlight {
     color: gold;
-    animation: glow 1.5s infinite;
+    font-weight: bold;
+    border: 1px solid gold;
+    box-shadow: 0 0 25px gold;
+    animation: glow 2s infinite;
 }
 
 @keyframes glow {
-    0% { box-shadow: 0 0 5px gold; }
-    50% { box-shadow: 0 0 30px gold; }
-    100% { box-shadow: 0 0 5px gold; }
+    0% { box-shadow: 0 0 10px gold; }
+    50% { box-shadow: 0 0 35px gold; }
+    100% { box-shadow: 0 0 10px gold; }
 }
 
 /* TYPEWRITER */
 .typewriter {
-    width: 80%;
+    width: 85%;
     max-width: 450px;
     font-family: 'Playfair Display', serif;
-    font-size: 15px;
-    background: rgba(255,255,255,0.1);
-    padding: 20px;
-    border-radius: 15px;
-    backdrop-filter: blur(5px);
+    font-size: 14px;
+    background: rgba(255,255,255,0.08);
+    padding: 22px;
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.15);
+    white-space: pre-line;
+    line-height: 1.5;
 }
 
 /* BUTTON */
 button {
-    margin-top: 20px;
-    padding: 10px 20px;
+    margin-top: 25px;
+    padding: 10px 22px;
     border-radius: 30px;
     border: none;
-    background: #ff4da6;
+    background: linear-gradient(45deg,#ff4da6,#ff1a75);
     color: white;
+    font-weight: 500;
+    transition: 0.3s;
 }
 
-/* MUSIC */
-.music-btn {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+button:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px #ff4da6;
 }
 
 /* MOBILE */
@@ -136,14 +137,6 @@ button {
 
 <canvas id="particles"></canvas>
 
-<div id="intro">A story you’ll never forget… 💫</div>
-
-<audio id="bgMusic" loop>
-<source src="music.mp3" type="audio/mpeg">
-</audio>
-
-<button class="music-btn" onclick="playMusic()">🎵</button>
-
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <!-- SLIDE 1 -->
@@ -152,15 +145,16 @@ button {
 <img src="photo.jpeg" class="profile">
 <div class="name">Dristi 💖</div>
 
+<div class="journey">
 <div class="box">Jan 2026 — Account Created</div>
-<div class="box">14 Jan — 500 Followers</div>
-<div class="box">15 Jan — 1K Followers</div>
-<div class="box">26 Jan — 4K Followers</div>
-<div class="box">11 Feb — 6K Followers</div>
-<div class="box">22 Feb — 8K Followers</div>
-<div class="box">12 Mar — 10K Followers</div>
-
-<div class="box highlight" onclick="celebrate()">21 March 2026 — 15K 👑</div>
+<div class="box">14 Jan 2026 — 500 Followers</div>
+<div class="box">15 Jan 2026 — 1K Followers</div>
+<div class="box">26 Jan 2026 — 4K Followers</div>
+<div class="box">11 Feb 2026 — 6K Followers</div>
+<div class="box">22 Feb 2026 — 8K Followers</div>
+<div class="box">12 March 2026 — 10K Followers</div>
+<div class="box highlight" onclick="celebrate()">21 March 2026 — 15K Followers 👑</div>
+</div>
 
 <button onclick="nextSlide()">Next ➡️</button>
 
@@ -176,19 +170,26 @@ button {
 </div>
 
 <script>
-// TYPEWRITER
+// FULL ORIGINAL TEXT
 const text = `She comes from the heart of heaven Nepal 🇳🇵
 Ra usko naam ho Dristi.
-She follows her dream of becoming a doctor.
-Golden heart and calm soul.
-And maybe… this is just the beginning 💫`;
+Ek aisi girl jo bachpan dekhi nai sapana dekhthyo… sirf 5 barsa ko umar ma usle decide garyo ki she wants to become a doctor, ra tespachi dekhi woh afno dream lai quietly, full dedication sanga follow gardai cha.
+Woh sirf kind matra hoina, usko heart sachai golden cha yesto mann jo sabko care garcha, even jab koi notice pani gardaina.
+Kabhi-kabhi usko efforts words ma express hudaina, tara clearly feel huncha.
+Har topper ko pani weakness huncha, ra usko lagi tyo ho math 😄
+But chemistry sanga usko connection ali different cha.
+Usko voice loud hoina, ek calm feeling jasto ho jasko sunera mann halka huncha.
+Ra usko sapana guitar sikne pani cha.
+Yo simple, innocent soul “Sleeping Queen” ko naam le pani chincha jo kahile-kahi sano kura ma tension lincha, tara tyo nai uslai ajhai real ra human banauncha.
+Usko life ma ek loving brother ra adorable pookie parents pani chan jasko presence le usko world complete jasto lagcha.
+Ra sachai… she is not just someone you meet in life she is someone who stays in your memory ra ek choti basyo vane sajilai kahile pani birsina sakinna.`;
 
 let i = 0;
 function typeWriter() {
     if (i < text.length) {
         document.getElementById("text").innerHTML += text.charAt(i);
         i++;
-        setTimeout(typeWriter, 20);
+        setTimeout(typeWriter, 18);
     }
 }
 
@@ -196,7 +197,7 @@ function typeWriter() {
 function nextSlide(){
     document.getElementById("slide1").classList.remove("active");
     document.getElementById("slide2").classList.add("active");
-    setTimeout(typeWriter, 500);
+    setTimeout(typeWriter, 400);
 }
 
 function goBack(){
@@ -206,14 +207,9 @@ function goBack(){
 // CONFETTI
 function celebrate(){
     confetti({
-        particleCount: 200,
-        spread: 120
+        particleCount: 220,
+        spread: 130
     });
-}
-
-// MUSIC
-function playMusic(){
-    document.getElementById("bgMusic").play();
 }
 
 // PARTICLES
@@ -223,18 +219,18 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 let particles = [];
-for(let i=0;i<50;i++){
+for(let i=0;i<60;i++){
     particles.push({
         x:Math.random()*canvas.width,
         y:Math.random()*canvas.height,
         r:Math.random()*2,
-        d:Math.random()*1
+        d:Math.random()*0.8
     });
 }
 
 function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="rgba(255,255,255,0.5)";
+    ctx.fillStyle="rgba(255,255,255,0.4)";
     particles.forEach(p=>{
         ctx.beginPath();
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
