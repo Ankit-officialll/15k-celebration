@@ -43,7 +43,7 @@ canvas {
     box-shadow: 0 0 40px rgba(255,77,166,0.6);
 }
 
-/* PREMIUM NAME */
+/* NAME */
 .name {
     font-size: 32px;
     font-weight: 600;
@@ -73,6 +73,7 @@ canvas {
     opacity: 0;
 }
 
+/* BOX ANIMATION */
 .box {
     padding: 10px 14px;
     border-radius: 14px;
@@ -80,6 +81,15 @@ canvas {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.15);
     font-size: 13px;
+
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.box.show {
+    opacity: 1;
+    transform: translateY(0);
+    transition: all 0.8s ease;
 }
 
 /* 15K */
@@ -99,9 +109,6 @@ canvas {
     background: linear-gradient(90deg, #ffd700, #ff4da6);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
-    letter-spacing: 1px;
-    text-shadow: 0 0 20px rgba(255,215,0,0.3);
 }
 
 /* TYPEWRITER */
@@ -116,7 +123,6 @@ canvas {
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.15);
     white-space: pre-line;
-    line-height: 1.5;
 }
 
 /* BUTTON */
@@ -207,18 +213,32 @@ function goBack(){
     location.reload();
 }
 
-// FLOW
+// FLOW + STAGGERED BOXES
 window.onload = function(){
+
+    // show congrats
     setTimeout(()=>{
         document.getElementById("congrats").style.opacity = 1;
     },1800);
 
+    // show journey step by step
     setTimeout(()=>{
         document.getElementById("journey").classList.remove("hidden");
 
-        confetti({
-            particleCount:200,
-            spread:120
+        const boxes = document.querySelectorAll(".box");
+
+        boxes.forEach((box, index) => {
+            setTimeout(() => {
+                box.classList.add("show");
+
+                if(index === boxes.length - 1){
+                    confetti({
+                        particleCount:200,
+                        spread:120
+                    });
+                }
+
+            }, index * 1000);
         });
 
     },3500);
