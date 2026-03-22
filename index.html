@@ -13,6 +13,7 @@ body{
     font-family:'Poppins',sans-serif;
     background:black;
     color:white;
+    overflow:hidden;
 }
 
 /* SLIDES */
@@ -28,27 +29,34 @@ body{
 }
 .active{display:flex;}
 
-/* PROFILE */
+/* PHOTO */
 .profile{
-    width:130px;
+    width:140px;
     border-radius:50%;
-    box-shadow:0 0 30px #ff4da6;
+    box-shadow:0 0 40px rgba(255,77,166,0.6);
+    opacity:0;
+    transform:scale(0.8);
+    transition:1.5s ease;
+}
+.profile.show{
+    opacity:1;
+    transform:scale(1);
 }
 
 /* NAME */
 .name{
-    font-size:28px;
+    font-size:30px;
     margin-top:10px;
     background:linear-gradient(90deg,#ff4da6,#ffd700);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
 }
 
-/* CONGRATS */
+/* TEXT */
 .congrats-text{
     font-size:18px;
-    margin-top:15px;
     opacity:0;
+    transition:1.5s ease;
 }
 
 /* BOX */
@@ -57,17 +65,19 @@ body{
     margin:4px;
     border-radius:12px;
     background:rgba(255,255,255,0.1);
+
     opacity:0;
     transform:translateY(20px);
 }
 .box.show{
     opacity:1;
     transform:translateY(0);
-    transition:0.6s;
+    transition:0.7s ease;
 }
+
 .highlight{
     color:gold;
-    box-shadow:0 0 20px gold;
+    box-shadow:0 0 25px gold;
 }
 
 /* BUTTON */
@@ -80,35 +90,62 @@ button{
     color:white;
 }
 
-/* TYPEWRITER */
+/* TYPEWRITER CARD */
 .typewriter{
-    max-width:90%;
+    max-width:380px;
+    text-align:left;
     font-family:'Playfair Display',serif;
-    font-size:14px;
-    white-space:pre-line;
+    font-size:15px;
+    line-height:1.7;
+    background:rgba(255,255,255,0.08);
+    padding:18px;
+    border-radius:14px;
+    backdrop-filter:blur(10px);
+    opacity:0;
+    transform:translateY(20px);
+    transition:1s ease;
+}
+.typewriter.show{
+    opacity:1;
+    transform:translateY(0);
 }
 
 /* SLIDE 3 */
 .slide3-text{
-    font-size:18px;
+    font-size:20px;
     opacity:0;
-    transition:opacity 1.5s ease;
+    transform:scale(0.95);
+    transition:2s ease;
+}
+.slide3-text.show{
+    opacity:1;
+    transform:scale(1);
 }
 
 .final-name{
-    font-size:38px;
-    margin-top:20px;
+    font-size:44px;
+    letter-spacing:2px;
     opacity:0;
+
     background:linear-gradient(90deg,#ffd700,#ff4da6);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    transition:opacity 2s ease;
+}
+.final-name.show{
+    animation:glowName 2s forwards;
 }
 
-/* MOBILE */
-@media(max-width:600px){
-    .profile{width:110px;}
-    .name{font-size:24px;}
+@keyframes glowName{
+    from{
+        opacity:0;
+        transform:scale(0.6);
+        filter:blur(6px);
+    }
+    to{
+        opacity:1;
+        transform:scale(1);
+        filter:blur(0);
+    }
 }
 </style>
 </head>
@@ -120,7 +157,7 @@ button{
 <!-- SLIDE 1 -->
 <div id="slide1" class="slide active">
 
-<img src="photo.jpeg" class="profile">
+<img src="photo.jpeg" class="profile" id="photo">
 <div class="name">Dristi</div>
 
 <div id="congrats" class="congrats-text">
@@ -147,7 +184,6 @@ a beautiful milestone in your journey 💫
 <div id="slide2" class="slide">
 
 <h2>About Her</h2>
-
 <div class="typewriter" id="text"></div>
 
 <button onclick="goToSlide(3)">Next ➡️</button>
@@ -159,7 +195,7 @@ a beautiful milestone in your journey 💫
 
 <div id="line1" class="slide3-text">
 Some journeys aren’t loud…<br>
-but they leave a mark 💫
+but they leave a mark
 </div>
 
 <div id="line2" class="slide3-text">
@@ -174,7 +210,7 @@ Dristi.
 </div>
 
 <script>
-// NAVIGATION
+// NAV
 function goToSlide(n){
     document.querySelectorAll(".slide").forEach(s=>s.classList.remove("active"));
     document.getElementById("slide"+n).classList.add("active");
@@ -183,7 +219,7 @@ function goToSlide(n){
     if(n===3) startSlide3();
 }
 
-// FULL ORIGINAL TEXT
+// TYPEWRITER
 const text = `She comes from the heart of heaven Nepal 🇳🇵
 Ra usko naam ho Dristi.
 Ek aisi girl jo bachpan dekhi nai sapana dekhthyo… sirf 5 barsa ko umar ma usle decide garyo ki she wants to become a doctor, ra tespachi dekhi woh afno dream lai quietly, full dedication sanga follow gardai cha.
@@ -198,11 +234,15 @@ Usko life ma ek loving brother ra adorable pookie parents pani chan jasko presen
 Ra sachai… she is not just someone you meet in life she is someone who stays in your memory ra ek choti basyo vane sajilai kahile pani birsina sakinna.`;
 
 let i=0;
+
 function startTyping(){
+    const el = document.getElementById("text");
+    el.classList.add("show");
     i=0;
-    document.getElementById("text").innerHTML="";
+    el.innerHTML="";
     type();
 }
+
 function type(){
     if(i<text.length){
         document.getElementById("text").innerHTML+=text.charAt(i);
@@ -211,12 +251,16 @@ function type(){
     }
 }
 
-// FLOW (SLIDE 1)
+// SLIDE 1 FLOW
 window.onload=function(){
 
 setTimeout(()=>{
+document.getElementById("photo").classList.add("show");
+},500);
+
+setTimeout(()=>{
 document.getElementById("congrats").style.opacity=1;
-},1500);
+},2000);
 
 setTimeout(()=>{
 let boxes=document.querySelectorAll(".box");
@@ -228,32 +272,32 @@ box.classList.add("show");
 if(i===boxes.length-1){
 confetti({particleCount:200,spread:120});
 }
-},i*800);
+},i*900);
 });
 
-},3000);
+},3500);
 };
 
-// SLIDE 3 CINEMATIC
+// SLIDE 3
 function startSlide3(){
 
 setTimeout(()=>{
-document.getElementById("line1").style.opacity=1;
+document.getElementById("line1").classList.add("show");
 },800);
 
 setTimeout(()=>{
-document.getElementById("line1").style.opacity=0;
-document.getElementById("line2").style.opacity=1;
-},3500);
+document.getElementById("line1").classList.remove("show");
+document.getElementById("line2").classList.add("show");
+},4000);
 
 setTimeout(()=>{
-document.getElementById("line2").style.opacity=0;
+document.getElementById("line2").classList.remove("show");
 
 setTimeout(()=>{
-document.getElementById("finalName").style.opacity=1;
-},1000);
+document.getElementById("finalName").classList.add("show");
+},1200);
 
-},6500);
+},7000);
 }
 </script>
 
