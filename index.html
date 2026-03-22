@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,15 +32,9 @@ canvas {
     align-items: center;
     justify-content: center;
     color: white;
-    animation: fadeIn 0.8s ease;
 }
 
 .active { display: flex; }
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
 
 /* PROFILE */
 .profile {
@@ -55,13 +48,18 @@ canvas {
     font-size: 32px;
     font-weight: 600;
     letter-spacing: 1px;
-
     background: linear-gradient(90deg, #ff4da6, #ffd700);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
-    text-shadow: 0 0 20px rgba(255, 77, 166, 0.4);
     margin-top: 12px;
+}
+
+/* CONGRATS */
+.congrats-text{
+    font-size: 20px;
+    margin-top: 20px;
+    opacity: 0;
+    text-align: center;
 }
 
 /* JOURNEY */
@@ -71,6 +69,10 @@ canvas {
     gap: 8px;
 }
 
+.hidden{
+    opacity: 0;
+}
+
 .box {
     padding: 10px 14px;
     border-radius: 14px;
@@ -78,12 +80,6 @@ canvas {
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255,255,255,0.15);
     font-size: 13px;
-    transition: 0.3s;
-}
-
-.box:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(255,77,166,0.6);
 }
 
 /* 15K */
@@ -92,13 +88,20 @@ canvas {
     font-weight: bold;
     border: 1px solid gold;
     box-shadow: 0 0 25px gold;
-    animation: glow 2s infinite;
 }
 
-@keyframes glow {
-    0% { box-shadow: 0 0 10px gold; }
-    50% { box-shadow: 0 0 35px gold; }
-    100% { box-shadow: 0 0 10px gold; }
+/* ABOUT TITLE */
+.about-title{
+    font-size: 26px;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 15px;
+
+    background: linear-gradient(90deg, #ffd700, #ff4da6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    letter-spacing: 1px;
+    text-shadow: 0 0 20px rgba(255,215,0,0.3);
 }
 
 /* TYPEWRITER */
@@ -124,18 +127,6 @@ button {
     border: none;
     background: linear-gradient(45deg,#ff4da6,#ff1a75);
     color: white;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-button:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 20px #ff4da6;
-}
-
-/* MOBILE */
-@media (max-width:768px){
-    body { overflow:auto; }
 }
 </style>
 </head>
@@ -152,7 +143,11 @@ button:hover {
 <img src="photo.jpeg" class="profile">
 <div class="name">Dristi</div>
 
-<div class="journey">
+<div id="congrats" class="congrats-text">
+    Congratulations for reaching <br> 15K followers 🎉
+</div>
+
+<div id="journey" class="journey hidden">
 <div class="box">Jan 2026 — Account Created</div>
 <div class="box">14 Jan 2026 — 500 Followers</div>
 <div class="box">15 Jan 2026 — 1K Followers</div>
@@ -160,7 +155,7 @@ button:hover {
 <div class="box">11 Feb 2026 — 6K Followers</div>
 <div class="box">22 Feb 2026 — 8K Followers</div>
 <div class="box">12 March 2026 — 10K Followers</div>
-<div class="box highlight" onclick="celebrate()">21 March 2026 — 15K Followers 👑</div>
+<div class="box highlight">23 March 2026 — 15K Followers 👑</div>
 </div>
 
 <button onclick="nextSlide()">Next ➡️</button>
@@ -170,6 +165,8 @@ button:hover {
 <!-- SLIDE 2 -->
 <div id="slide2" class="slide">
 
+<div class="about-title">About Her</div>
+
 <div class="typewriter" id="text"></div>
 
 <button onclick="goBack()">⬅ Back</button>
@@ -177,7 +174,7 @@ button:hover {
 </div>
 
 <script>
-// FULL TEXT
+// TEXT
 const text = `She comes from the heart of heaven Nepal 🇳🇵
 Ra usko naam ho Dristi.
 Ek aisi girl jo bachpan dekhi nai sapana dekhthyo… sirf 5 barsa ko umar ma usle decide garyo ki she wants to become a doctor, ra tespachi dekhi woh afno dream lai quietly, full dedication sanga follow gardai cha.
@@ -210,14 +207,24 @@ function goBack(){
     location.reload();
 }
 
-function celebrate(){
-    confetti({
-        particleCount: 220,
-        spread: 130
-    });
-}
+// FLOW
+window.onload = function(){
+    setTimeout(()=>{
+        document.getElementById("congrats").style.opacity = 1;
+    },1800);
 
-/* PARTICLES */
+    setTimeout(()=>{
+        document.getElementById("journey").classList.remove("hidden");
+
+        confetti({
+            particleCount:200,
+            spread:120
+        });
+
+    },3500);
+};
+
+// PARTICLES
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
 canvas.width = window.innerWidth;
@@ -241,10 +248,6 @@ function draw(){
         ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
         ctx.fill();
     });
-    update();
-}
-
-function update(){
     particles.forEach(p=>{
         p.y+=p.d;
         if(p.y>canvas.height) p.y=0;
