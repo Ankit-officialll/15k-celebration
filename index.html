@@ -3,303 +3,683 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>15K Celebration</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-
+<title>Dristi · 15K</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <style>
-body{
-    margin:0;
-    font-family:'Poppins',sans-serif;
-    background:black;
-    color:white;
-    overflow:hidden;
+:root {
+  --rose:    #f472b6;
+  --gold:    #fbbf24;
+  --cream:   #fdf6ee;
+  --deep:    #0a0608;
+  --surface: rgba(255,255,255,0.04);
+  --border:  rgba(255,255,255,0.08);
+  --serif:   'Cormorant Garamond', serif;
+  --sans:    'DM Sans', sans-serif;
+  --mono:    'DM Mono', monospace;
 }
 
-/* SLIDES */
-.slide{
-    width:100%;
-    height:100vh;
-    display:none;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:20px;
-}
-.active{display:flex;}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
 
-/* PHOTO */
-.profile{
-    width:140px;
-    border-radius:50%;
-    box-shadow:0 0 40px rgba(255,77,166,0.6);
-    opacity:0;
-    transform:scale(0.8);
-    transition:1.5s ease;
-}
-.profile.show{
-    opacity:1;
-    transform:scale(1);
+body {
+  background: var(--deep);
+  color: #f0e8f0;
+  font-family: var(--sans);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  cursor: none;
 }
 
-/* NAME */
-.name{
-    font-size:30px;
-    margin-top:10px;
-    background:linear-gradient(90deg,#ff4da6,#ffd700);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+/* ── GRAIN ── */
+body::after {
+  content:'';
+  position:fixed; inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 9000;
 }
 
-/* TEXT */
-.congrats-text{
-    font-size:18px;
-    opacity:0;
-    transition:1.5s ease;
+/* ── CURSOR ── */
+#cur { position:fixed; width:6px; height:6px; background:var(--rose); border-radius:50%; pointer-events:none; z-index:9999; transform:translate(-50%,-50%); mix-blend-mode:screen; }
+#cur-ring { position:fixed; width:28px; height:28px; border:1px solid rgba(244,114,182,0.3); border-radius:50%; pointer-events:none; z-index:9998; transform:translate(-50%,-50%); transition:all .15s; }
+
+/* ── AMBIENT BG ── */
+.ambient {
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background: radial-gradient(ellipse 70% 60% at 20% 80%, rgba(244,114,182,0.07) 0%, transparent 60%),
+              radial-gradient(ellipse 50% 50% at 80% 20%, rgba(251,191,36,0.05) 0%, transparent 60%),
+              radial-gradient(ellipse 60% 80% at 50% 50%, rgba(120,40,80,0.12) 0%, transparent 70%);
 }
 
-/* BOX */
-.box{
-    padding:8px 12px;
-    margin:4px;
-    border-radius:12px;
-    background:rgba(255,255,255,0.1);
+/* ── FLOATING PARTICLES ── */
+#particles { position:fixed; inset:0; pointer-events:none; z-index:1; }
 
-    opacity:0;
-    transform:translateY(20px);
+/* ── SLIDES ── */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
 }
-.box.show{
-    opacity:1;
-    transform:translateY(0);
-    transition:0.7s ease;
-}
-
-.highlight{
-    color:gold;
-    box-shadow:0 0 25px gold;
-}
-
-/* BUTTON */
-button{
-    margin-top:20px;
-    padding:10px 18px;
-    border-radius:20px;
-    border:none;
-    background:#ff4da6;
-    color:white;
+.slide.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
-/* TYPEWRITER CARD */
-.typewriter{
-    max-width:380px;
-    text-align:left;
-    font-family:'Playfair Display',serif;
-    font-size:15px;
-    line-height:1.7;
-    background:rgba(255,255,255,0.08);
-    padding:18px;
-    border-radius:14px;
-    backdrop-filter:blur(10px);
-    opacity:0;
-    transform:translateY(20px);
-    transition:1s ease;
-}
-.typewriter.show{
-    opacity:1;
-    transform:translateY(0);
+/* ── SLIDE 1 ── */
+.s1-top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
 }
 
-/* SLIDE 3 */
-.slide3-text{
-    font-size:20px;
-    opacity:0;
-    transform:scale(0.95);
-    transition:2s ease;
+.photo-wrap {
+  position: relative;
+  width: 118px; height: 118px;
+  opacity: 0;
+  transform: scale(0.7) translateY(20px);
+  transition: opacity 1.4s cubic-bezier(.16,1,.3,1), transform 1.4s cubic-bezier(.16,1,.3,1);
 }
-.slide3-text.show{
-    opacity:1;
-    transform:scale(1);
+.photo-wrap.show { opacity:1; transform:scale(1) translateY(0); }
+.photo-ring {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: conic-gradient(var(--rose), var(--gold), #c084fc, var(--rose));
+  animation: spinRing 6s linear infinite;
+  z-index: 0;
+}
+@keyframes spinRing { to { transform: rotate(360deg); } }
+.photo-inner {
+  position:absolute; inset:3px;
+  border-radius:50%;
+  background:var(--deep);
+  z-index:1;
+  overflow:hidden;
+}
+.photo-inner img {
+  width:100%; height:100%;
+  object-fit:cover;
+  border-radius:50%;
+}
+.photo-glow {
+  position:absolute; inset:-20px;
+  border-radius:50%;
+  background: radial-gradient(circle, rgba(244,114,182,0.3), transparent 70%);
+  z-index:-1;
+  animation: glowPulse 3s ease infinite;
+}
+@keyframes glowPulse { 0%,100%{opacity:.6} 50%{opacity:1} }
+
+.hero-name {
+  font-family: var(--serif);
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  background: linear-gradient(90deg, var(--rose), var(--gold), #f9a8d4);
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200%;
+  animation: gradShift 5s ease infinite;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1s ease .6s, transform 1s ease .6s;
+}
+.hero-name.show { opacity:1; transform:translateY(0); }
+@keyframes gradShift { 0%,100%{background-position:0%} 50%{background-position:100%} }
+
+.milestone-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border: 1px solid rgba(251,191,36,0.35);
+  border-radius: 24px;
+  background: rgba(251,191,36,0.07);
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 1s ease 1s;
+}
+.milestone-badge.show { opacity:1; }
+.badge-dot { width:6px; height:6px; background:var(--gold); border-radius:50%; animation:glowPulse 1.5s ease infinite; }
+
+.congrats-line {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(240,232,240,0.65);
+  letter-spacing: .02em;
+  opacity: 0;
+  transition: opacity 1.2s ease 1.4s;
+  text-align: center;
+  max-width: 340px;
+  line-height: 1.6;
+}
+.congrats-line.show { opacity:1; }
+
+/* ── TIMELINE ── */
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  max-width: 360px;
+  margin-bottom: 24px;
+}
+.tl-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  opacity: 0;
+  transform: translateX(-16px);
+  transition: opacity .6s ease, transform .6s ease;
+  position: relative;
+}
+.tl-item.show { opacity:1; transform:translateX(0); }
+.tl-item:last-child { border-bottom: none; }
+.tl-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--rose);
+  flex-shrink: 0;
+  opacity: .5;
+}
+.tl-item.highlight-tl .tl-dot {
+  background: var(--gold);
+  opacity: 1;
+  box-shadow: 0 0 10px var(--gold);
+}
+.tl-date {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(240,232,240,0.35);
+  width: 100px;
+  flex-shrink: 0;
+  letter-spacing: .05em;
+}
+.tl-val {
+  font-size: 13px;
+  color: rgba(240,232,240,0.75);
+  font-weight: 400;
+}
+.tl-item.highlight-tl .tl-date,
+.tl-item.highlight-tl .tl-val {
+  color: var(--gold);
+  font-weight: 500;
 }
 
-.final-name{
-    font-size:44px;
-    letter-spacing:2px;
-    opacity:0;
-
-    background:linear-gradient(90deg,#ffd700,#ff4da6);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
+/* ── BTN ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border: 1px solid rgba(244,114,182,0.3);
+  border-radius: 32px;
+  background: transparent;
+  color: rgba(240,232,240,0.8);
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all .3s ease;
+  margin-top: 6px;
 }
-.final-name.show{
-    animation:glowName 2s forwards;
+.btn:hover {
+  background: rgba(244,114,182,0.1);
+  border-color: var(--rose);
+  color: var(--rose);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(244,114,182,0.2);
+}
+.btn-arrow { transition: transform .3s; }
+.btn:hover .btn-arrow { transform: translateX(4px); }
+
+/* ── SLIDE 2 ── */
+.s2-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  color: rgba(244,114,182,0.5);
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  opacity: 0;
+  transition: opacity 1s ease .3s;
+}
+.s2-label.show { opacity:1; }
+
+.letter-card {
+  max-width: 400px;
+  width: 100%;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 30px;
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease .5s, transform 1s ease .5s;
+}
+.letter-card.show { opacity:1; transform:translateY(0); }
+.letter-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rose), transparent);
 }
 
-@keyframes glowName{
-    from{
-        opacity:0;
-        transform:scale(0.6);
-        filter:blur(6px);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-        filter:blur(0);
-    }
+.letter-text {
+  font-family: var(--serif);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.85;
+  color: rgba(240,232,240,0.78);
+  min-height: 180px;
+}
+.letter-cursor {
+  display: inline-block;
+  width: 1.5px;
+  height: 16px;
+  background: var(--rose);
+  margin-left: 2px;
+  vertical-align: middle;
+  animation: blink .6s step-end infinite;
+}
+@keyframes blink { 50%{opacity:0} }
+
+.letter-quote {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 13px;
+  color: rgba(244,114,182,0.6);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.letter-quote.show { opacity:1; }
+
+/* ── SLIDE 3 ── */
+.s3-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  text-align: center;
+}
+.s3-line {
+  font-family: var(--serif);
+  font-size: clamp(18px,3.5vw,26px);
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(240,232,240,0.7);
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 1.4s ease, transform 1.4s ease;
+  max-width: 380px;
+}
+.s3-line.show { opacity:1; transform:translateY(0); }
+
+.s3-divider {
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rose), transparent);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.s3-divider.show { opacity:1; }
+
+.s3-final {
+  font-family: var(--serif);
+  font-size: clamp(52px, 12vw, 88px);
+  font-weight: 300;
+  letter-spacing: 8px;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--rose) 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  color: transparent;
+  background-size: 200%;
+  opacity: 0;
+  filter: blur(12px);
+  transform: scale(0.8);
+  transition: opacity 1.8s ease, filter 1.8s ease, transform 1.8s cubic-bezier(.16,1,.3,1);
+}
+.s3-final.show {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+  animation: gradShift 6s ease infinite;
+}
+
+.s3-sub {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: rgba(240,232,240,0.3);
+  text-transform: uppercase;
+  opacity: 0;
+  transition: opacity 1.2s ease;
+}
+.s3-sub.show { opacity:1; }
+
+.hearts-row {
+  display: flex;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+.hearts-row.show { opacity:1; }
+.heart {
+  font-size: 18px;
+  animation: heartBeat 2s ease infinite;
+}
+.heart:nth-child(2) { animation-delay:.2s; }
+.heart:nth-child(3) { animation-delay:.4s; }
+@keyframes heartBeat { 0%,100%{transform:scale(1)} 50%{transform:scale(1.25)} }
+
+/* ── PROGRESS ── */
+.progress-dots {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 100;
+}
+.pdot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: all .3s ease;
+  cursor: pointer;
+}
+.pdot.active {
+  background: var(--rose);
+  box-shadow: 0 0 8px var(--rose);
+  width: 20px;
+  border-radius: 4px;
 }
 </style>
 </head>
-
 <body>
 
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<div class="ambient"></div>
+<canvas id="particles"></canvas>
+<div id="cur"></div>
+<div id="cur-ring"></div>
 
-<!-- SLIDE 1 -->
+<!-- PROGRESS -->
+<div class="progress-dots">
+  <div class="pdot active" onclick="goToSlide(1)"></div>
+  <div class="pdot" onclick="goToSlide(2)"></div>
+  <div class="pdot" onclick="goToSlide(3)"></div>
+</div>
+
+<!-- ══ SLIDE 1 ══ -->
 <div id="slide1" class="slide active">
+  <div class="s1-top">
+    <div class="photo-wrap" id="photoWrap">
+      <div class="photo-ring"></div>
+      <div class="photo-inner">
+        <img src="photo.jpeg" alt="Dristi" id="photo" onerror="this.style.display='none';this.parentNode.style.background='linear-gradient(135deg,#f472b6,#fbbf24)'">
+      </div>
+      <div class="photo-glow"></div>
+    </div>
 
-<img src="photo.jpeg" class="profile" id="photo">
-<div class="name">Dristi</div>
+    <div class="hero-name" id="heroName">Dristi</div>
 
-<div id="congrats" class="congrats-text">
-Congratulations on reaching 15K followers…<br><br>
-a beautiful milestone in your journey 💫
+    <div class="milestone-badge" id="badge">
+      <span class="badge-dot"></span>
+      15,000 Followers
+    </div>
+
+    <p class="congrats-line" id="congratsLine">
+      Congratulations on this beautiful milestone —<br>
+      <em>a journey written in dedication & light.</em>
+    </p>
+  </div>
+
+  <div class="timeline" id="timeline">
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">Jan 2026</div>
+      <div class="tl-val">Account Created ✨</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">14 Jan 2026</div>
+      <div class="tl-val">500 Followers</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">15 Jan 2026</div>
+      <div class="tl-val">1K Followers</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">26 Jan 2026</div>
+      <div class="tl-val">4K Followers</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">11 Feb 2026</div>
+      <div class="tl-val">6K Followers</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">22 Feb 2026</div>
+      <div class="tl-val">8K Followers</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-date">12 Mar 2026</div>
+      <div class="tl-val">10K Followers</div>
+    </div>
+    <div class="tl-item highlight-tl">
+      <div class="tl-dot"></div>
+      <div class="tl-date">23 Mar 2026</div>
+      <div class="tl-val">15K Followers 👑</div>
+    </div>
+  </div>
+
+  <button class="btn" onclick="goToSlide(2)">
+    Her Story <span class="btn-arrow">→</span>
+  </button>
 </div>
 
-<div id="journey">
-<div class="box">Jan 2026 — Account Created</div>
-<div class="box">14 Jan 2026 — 500 Followers</div>
-<div class="box">15 Jan 2026 — 1K Followers</div>
-<div class="box">26 Jan 2026 — 4K Followers</div>
-<div class="box">11 Feb 2026 — 6K Followers</div>
-<div class="box">22 Feb 2026 — 8K Followers</div>
-<div class="box">12 March 2026 — 10K Followers</div>
-<div class="box highlight">23 March 2026 — 15K Followers 👑</div>
-</div>
-
-<button onclick="goToSlide(2)">Next ➡️</button>
-
-</div>
-
-<!-- SLIDE 2 -->
+<!-- ══ SLIDE 2 ══ -->
 <div id="slide2" class="slide">
+  <div class="s2-label" id="s2label">About Her</div>
 
-<h2>About Her</h2>
-<div class="typewriter" id="text"></div>
+  <div class="letter-card" id="letterCard">
+    <div class="letter-text" id="letterText"></div>
+    <div class="letter-quote" id="letterQuote">
+      — Someone who stays in your memory, always.
+    </div>
+  </div>
 
-<button onclick="goToSlide(3)">Next ➡️</button>
+  <div class="letter-cursor" id="letterCursor"></div>
 
+  <button class="btn" id="s2btn" onclick="goToSlide(3)" style="margin-top:16px;display:none;">
+    The Finale <span class="btn-arrow">→</span>
+  </button>
 </div>
 
-<!-- SLIDE 3 -->
+<!-- ══ SLIDE 3 ══ -->
 <div id="slide3" class="slide">
-
-<div id="line1" class="slide3-text">
-Some journeys aren’t loud…<br>
-but they leave a mark
-</div>
-
-<div id="line2" class="slide3-text">
-And today…<br>
-15K hearts chose to stay.
-</div>
-
-<div id="finalName" class="final-name">
-Dristi.
-</div>
-
+  <div class="s3-wrap">
+    <div class="s3-line" id="s3line1">
+      Some journeys aren't loud…<br>but they leave a mark.
+    </div>
+    <div class="s3-divider" id="s3div"></div>
+    <div class="s3-line" id="s3line2">
+      And today… 15K hearts<br>chose to stay. 💫
+    </div>
+    <div class="s3-final" id="s3final">Dristi.</div>
+    <div class="s3-sub" id="s3sub">15,000 · Thank you · 💗</div>
+    <div class="hearts-row" id="heartsRow">
+      <span class="heart">🌸</span>
+      <span class="heart">💛</span>
+      <span class="heart">🌸</span>
+    </div>
+  </div>
 </div>
 
 <script>
-// NAV
-function goToSlide(n){
-    document.querySelectorAll(".slide").forEach(s=>s.classList.remove("active"));
-    document.getElementById("slide"+n).classList.add("active");
-
-    if(n===2) startTyping();
-    if(n===3) startSlide3();
-}
-
-// TYPEWRITER
-const text = `She comes from the heart of heaven Nepal 🇳🇵
-Ra usko naam ho Dristi.
-Ek aisi girl jo bachpan dekhi nai sapana dekhthyo… sirf 5 barsa ko umar ma usle decide garyo ki she wants to become a doctor, ra tespachi dekhi woh afno dream lai quietly, full dedication sanga follow gardai cha.
-Woh sirf kind matra hoina, usko heart sachai golden cha yesto mann jo sabko care garcha, even jab koi notice pani gardaina.
-Kabhi-kabhi usko efforts words ma express hudaina, tara clearly feel huncha.
-Har topper ko pani weakness huncha, ra usko lagi tyo ho math 😄
-But chemistry sanga usko connection ali different cha.
-Usko voice loud hoina, ek calm feeling jasto ho jasko sunera mann halka huncha.
-Ra usko sapana guitar sikne pani cha.
-Yo simple, innocent soul “Sleeping Queen” ko naam le pani chincha jo kahile-kahi sano kura ma tension lincha, tara tyo nai uslai ajhai real ra human banauncha.
-Usko life ma ek loving brother ra adorable pookie parents pani chan jasko presence le usko world complete jasto lagcha.
-Ra sachai… she is not just someone you meet in life she is someone who stays in your memory ra ek choti basyo vane sajilai kahile pani birsina sakinna.`;
-
-let i=0;
-
-function startTyping(){
-    const el = document.getElementById("text");
-    el.classList.add("show");
-    i=0;
-    el.innerHTML="";
-    type();
-}
-
-function type(){
-    if(i<text.length){
-        document.getElementById("text").innerHTML+=text.charAt(i);
-        i++;
-        setTimeout(type,18);
-    }
-}
-
-// SLIDE 1 FLOW
-window.onload=function(){
-
-setTimeout(()=>{
-document.getElementById("photo").classList.add("show");
-},500);
-
-setTimeout(()=>{
-document.getElementById("congrats").style.opacity=1;
-},2000);
-
-setTimeout(()=>{
-let boxes=document.querySelectorAll(".box");
-
-boxes.forEach((box,i)=>{
-setTimeout(()=>{
-box.classList.add("show");
-
-if(i===boxes.length-1){
-confetti({particleCount:200,spread:120});
-}
-},i*900);
+// ── CURSOR ──
+const cur = document.getElementById('cur'), curRing = document.getElementById('cur-ring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e => {
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
 });
+(function loop(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; curRing.style.left=rx+'px'; curRing.style.top=ry+'px'; requestAnimationFrame(loop); })();
 
-},3500);
+// ── PARTICLES ──
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+window.addEventListener('resize', ()=>{ canvas.width=window.innerWidth; canvas.height=window.innerHeight; });
+
+const particles = Array.from({length:40}, ()=>({
+  x: Math.random()*canvas.width,
+  y: Math.random()*canvas.height,
+  r: Math.random()*1.5+.3,
+  vx: (Math.random()-.5)*.25,
+  vy: (Math.random()-.5)*.25,
+  o: Math.random()*.3+.05,
+  hue: Math.random() > .5 ? '#f472b6' : '#fbbf24'
+}));
+
+(function drawP(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  particles.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0||p.x>canvas.width) p.vx*=-1;
+    if(p.y<0||p.y>canvas.height) p.vy*=-1;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle = p.hue.replace(')', `,${p.o})`).replace('rgb','rgba').replace('#f472b6',`rgba(244,114,182,${p.o})`).replace('#fbbf24',`rgba(251,191,36,${p.o})`);
+    ctx.fill();
+  });
+  requestAnimationFrame(drawP);
+})();
+
+// ── SLIDE SYSTEM ──
+let currentSlide = 1;
+function goToSlide(n) {
+  document.querySelectorAll('.slide').forEach(s=>s.classList.remove('active'));
+  document.getElementById('slide'+n).classList.add('active');
+  document.querySelectorAll('.pdot').forEach((d,i)=>d.classList.toggle('active', i===n-1));
+  currentSlide = n;
+  if(n===2) initSlide2();
+  if(n===3) initSlide3();
+}
+
+// ── SLIDE 1 INIT ──
+window.onload = function(){
+  setTimeout(()=>{ document.getElementById('photoWrap').classList.add('show'); }, 400);
+  setTimeout(()=>{ document.getElementById('heroName').classList.add('show'); }, 900);
+  setTimeout(()=>{ document.getElementById('badge').classList.add('show'); }, 1400);
+  setTimeout(()=>{ document.getElementById('congratsLine').classList.add('show'); }, 1700);
+
+  const items = document.querySelectorAll('.tl-item');
+  items.forEach((item, i)=>{
+    setTimeout(()=>{
+      item.classList.add('show');
+      if(i === items.length-1){
+        setTimeout(()=>{
+          confetti({ particleCount:120, spread:90, colors:['#f472b6','#fbbf24','#c084fc','#fbcfe8'], origin:{y:.6} });
+        }, 400);
+      }
+    }, 2400 + i*350);
+  });
 };
 
-// SLIDE 3
-function startSlide3(){
+// ── SLIDE 2 ──
+const fullText = `She comes from the heart of heaven — Nepal 🇳🇵\nAnd her name is Dristi.\n\nEk aisi girl jo sirf 5 barsa ki umar mein decide kar chuki thi ki woh doctor banegi — aur tab se woh apne sapne ko quietly, poori dedication ke saath follow kar rahi hai.\n\nUska dil sachchi mein golden hai. Woh sabka care karti hai, even jab koi notice nahi karta.\n\nMath se uska koi khaas rishta nahi — lekin Chemistry se woh connect karti hai kuch alag hi andaaz mein. 😄\n\nUski awaaz loud nahi hai — woh ek calm feeling hai, jaisi sunne ke baad mann halka ho jaata hai.\n\nGuitar seekhne ka sapna abhi baaki hai. "Sleeping Queen" ke naam se bhi jaani jaati hai — jo kabhi choti choti baaton mein tension leti hai, aur wahi usse real aur beautiful banata hai.\n\nUske life mein ek loving brother hai, adorable parents hain — aur unki presence se uski duniya complete lagti hai.\n\nWoh sirf koi mili-juli insaan nahi — woh woh hoti hai jo yaad rehti hai.`;
 
-setTimeout(()=>{
-document.getElementById("line1").classList.add("show");
-},800);
+let charIdx = 0, typing = false;
 
-setTimeout(()=>{
-document.getElementById("line1").classList.remove("show");
-document.getElementById("line2").classList.add("show");
-},4000);
+function initSlide2(){
+  if(typing) return;
+  document.getElementById('s2label').classList.add('show');
+  document.getElementById('letterCard').classList.add('show');
+  document.getElementById('letterCursor').style.display = 'inline-block';
+  typing = true;
+  charIdx = 0;
+  document.getElementById('letterText').innerHTML = '';
+  document.getElementById('letterQuote').classList.remove('show');
+  document.getElementById('s2btn').style.display = 'none';
+  setTimeout(typeChar, 600);
+}
 
-setTimeout(()=>{
-document.getElementById("line2").classList.remove("show");
+function typeChar(){
+  if(charIdx < fullText.length){
+    const ch = fullText[charIdx];
+    const el = document.getElementById('letterText');
+    if(ch === '\n') el.innerHTML += '<br>';
+    else el.innerHTML += ch;
+    charIdx++;
+    el.scrollTop = el.scrollHeight;
+    setTimeout(typeChar, ch === '\n' ? 80 : 14);
+  } else {
+    document.getElementById('letterCursor').style.display = 'none';
+    setTimeout(()=>{
+      document.getElementById('letterQuote').classList.add('show');
+      document.getElementById('s2btn').style.display = 'inline-flex';
+    }, 600);
+  }
+}
 
-setTimeout(()=>{
-document.getElementById("finalName").classList.add("show");
-},1200);
+// ── SLIDE 3 ──
+function initSlide3(){
+  const ids = ['s3line1','s3div','s3line2','s3final','s3sub','heartsRow'];
+  ids.forEach(id=>document.getElementById(id).classList.remove('show'));
 
-},7000);
+  setTimeout(()=>document.getElementById('s3line1').classList.add('show'), 600);
+  setTimeout(()=>document.getElementById('s3div').classList.add('show'), 2200);
+  setTimeout(()=>{
+    document.getElementById('s3line1').style.opacity='0';
+    document.getElementById('s3line1').style.transform='translateY(-12px)';
+  }, 3800);
+  setTimeout(()=>document.getElementById('s3line2').classList.add('show'), 4400);
+  setTimeout(()=>{
+    document.getElementById('s3line2').style.opacity='0';
+    document.getElementById('s3line2').style.transform='translateY(-12px)';
+    document.getElementById('s3div').style.opacity='0';
+  }, 7200);
+  setTimeout(()=>{
+    document.getElementById('s3final').classList.add('show');
+    confetti({ particleCount:200, spread:130, colors:['#f472b6','#fbbf24','#c084fc','#fbcfe8','#fff'], origin:{y:.5} });
+  }, 8400);
+  setTimeout(()=>document.getElementById('s3sub').classList.add('show'), 9800);
+  setTimeout(()=>document.getElementById('heartsRow').classList.add('show'), 10400);
 }
 </script>
-
 </body>
 </html>
