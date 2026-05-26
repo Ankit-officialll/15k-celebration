@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,21 +31,17 @@ body{
   cursor:none;
 }
 
-/* NOISE */
 body::after{
   content:'';position:fixed;inset:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
   opacity:0.045;pointer-events:none;z-index:9999;mix-blend-mode:overlay;
 }
 
-/* CURSOR */
 #cur{position:fixed;width:5px;height:5px;background:var(--rose);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);}
 #cur-ring{position:fixed;width:22px;height:22px;border:1px solid rgba(232,160,160,0.25);border-radius:50%;pointer-events:none;z-index:9997;transform:translate(-50%,-50%);transition:all .15s;}
 
-/* GALAXY */
 #galaxy{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
-/* FLOATING PETALS */
 .petal{
   position:fixed;pointer-events:none;z-index:2;
   width:6px;height:10px;border-radius:50% 50% 50% 0;
@@ -59,14 +56,12 @@ body::after{
   100%{transform:translateY(110vh) rotate(720deg) scale(.5);opacity:0;}
 }
 
-/* CINEMATIC BARS */
 .cbar{position:fixed;left:0;right:0;height:66px;background:var(--bg);z-index:600;transition:transform 1.4s cubic-bezier(.16,1,.3,1);}
 .cbar-t{top:0;}
 .cbar-b{bottom:0;}
 .open .cbar-t{transform:translateY(-100%);}
 .open .cbar-b{transform:translateY(100%);}
 
-/* PROGRESS */
 #progress{
   position:fixed;right:22px;top:50%;transform:translateY(-50%);
   display:flex;flex-direction:column;gap:10px;z-index:400;
@@ -74,7 +69,6 @@ body::after{
 .pdot{width:4px;height:4px;border-radius:50%;background:rgba(232,160,160,0.2);transition:all .5s ease;}
 .pdot.on{background:var(--rose);height:18px;border-radius:2px;box-shadow:0 0 6px rgba(232,160,160,0.5);}
 
-/* PANELS */
 #stage{position:fixed;inset:0;z-index:10;}
 .panel{
   position:absolute;inset:0;
@@ -85,7 +79,6 @@ body::after{
 }
 .panel.vis{opacity:1;pointer-events:all;}
 
-/* GOLD LINE */
 .gline{
   height:1px;
   background:linear-gradient(90deg,transparent,var(--rose),transparent);
@@ -93,7 +86,6 @@ body::after{
 }
 .gline.on{width:160px;}
 
-/* SCROLL HINT */
 #scrollHint{
   position:fixed;bottom:26px;left:50%;transform:translateX(-50%);
   display:flex;flex-direction:column;align-items:center;gap:8px;
@@ -106,7 +98,6 @@ body::after{
 .hint-line{width:1px;height:32px;background:linear-gradient(to bottom,var(--rose),transparent);}
 @keyframes hintBob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)}}
 
-/* ══ PANEL 0 — INTRO ══ */
 .p0-eyebrow{
   font-family:var(--mono);font-size:9px;letter-spacing:.35em;
   color:rgba(232,160,160,0.4);text-transform:uppercase;
@@ -116,7 +107,6 @@ body::after{
 }
 .p0-eyebrow.in{opacity:1;transform:translateY(0);}
 
-/* CAKE ICON */
 .cake-wrap{
   margin-bottom:18px;font-size:40px;
   opacity:0;transform:scale(.5) rotate(-15deg);
@@ -125,7 +115,6 @@ body::after{
 }
 .cake-wrap.in{opacity:1;transform:scale(1) rotate(0deg);}
 
-/* PHOTO */
 .photo-wrap{
   position:relative;width:120px;height:120px;
   opacity:0;transform:scale(.8);
@@ -180,7 +169,6 @@ body::after{
 .badge.in{opacity:1;}
 .bdot{width:5px;height:5px;background:var(--rose);border-radius:50%;animation:glowP 1.5s ease infinite;}
 
-/* ══ PANEL 1 — CHILDHOOD ══ */
 .ch-title{
   font-family:var(--serif);font-size:11px;font-style:italic;
   letter-spacing:.25em;color:rgba(232,160,160,0.4);text-transform:uppercase;
@@ -228,7 +216,6 @@ body::after{
 }
 .ch-caption.in{opacity:1;}
 
-/* ══ PANEL 2 — TRANSFORMATION ══ */
 .tr-title{
   font-family:var(--mono);font-size:9px;letter-spacing:.35em;
   color:rgba(232,160,160,0.35);text-transform:uppercase;
@@ -256,10 +243,7 @@ body::after{
   box-shadow:0 0 40px rgba(232,160,160,0.08);
 }
 .split-wrap.in{opacity:1;transform:scale(1);}
-.split-side{
-  flex:1;position:relative;
-  height:200px;overflow:hidden;
-}
+.split-side{flex:1;position:relative;height:200px;overflow:hidden;}
 .split-side img{width:100%;height:100%;object-fit:cover;display:block;}
 .split-divider{
   position:absolute;left:50%;top:0;bottom:0;width:1px;
@@ -289,7 +273,6 @@ body::after{
 }
 .tr-msg.in{opacity:1;}
 
-/* ══ PANEL 3 — MESSAGE ══ */
 .msg-label{
   font-family:var(--mono);font-size:9px;letter-spacing:.3em;
   color:rgba(232,160,160,0.35);text-transform:uppercase;
@@ -341,7 +324,6 @@ body::after{
 }
 .nudge.in{opacity:1;}
 
-/* ══ PANEL 4 — FINALE ══ */
 .finale-wrap{
   display:flex;flex-direction:column;align-items:center;
   gap:14px;text-align:center;
@@ -422,7 +404,7 @@ body::after{
 
   <!-- PANEL 0 — INTRO -->
   <div class="panel vis" id="p0">
-    <div class="p0-eyebrow" id="ey0">June 2 · A Birthday ·  A Celebration</div>
+    <div class="p0-eyebrow" id="ey0">June 2 · A Birthday · A Celebration</div>
     <div class="cake-wrap" id="cw">🎂</div>
     <div class="photo-wrap" id="pw">
       <div class="ph-ring"></div>
@@ -449,20 +431,17 @@ body::after{
     <div class="gline" id="gl1" style="margin-bottom:20px;"></div>
     <div class="photos-row" id="prow">
       <div class="ch-photo" id="cp1">
-        <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/Photo-1.jpg"
-             alt="Dristi childhood"
+        <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/Photo-1.jpg" alt="Dristi childhood"
              onerror="this.style.background='linear-gradient(135deg,#2a0a0a,#5a2020)';this.style.display='block';this.style.width='100%';this.style.height='100%'">
         <div class="yr">Little Dristi</div>
       </div>
       <div class="ch-photo" id="cp2">
-        <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/Photo-2.jpg"
-             alt="Dristi childhood"
+        <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/Photo-2.jpg" alt="Dristi childhood"
              onerror="this.style.background='linear-gradient(135deg,#2a0a0a,#5a2020)';this.style.display='block'">
         <div class="yr">Growing Up</div>
       </div>
       <div class="ch-photo" id="cp3">
-        <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/Photo-3.jpg"
-             alt="Dristi childhood"
+        <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/Photo-3.jpg" alt="Dristi childhood"
              onerror="this.style.background='linear-gradient(135deg,#2a0a0a,#5a2020)';this.style.display='block'">
         <div class="yr">Memories</div>
       </div>
@@ -476,16 +455,14 @@ body::after{
     <div class="tr-headline" id="trh">From a little girl to a queen 🌸</div>
     <div class="split-wrap" id="sw">
       <div class="split-side">
-        <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/Photo-4.jpg"
-             alt="Dristi young"
+        <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/Photo-4.jpg" alt="Dristi young"
              style="object-position:left center"
              onerror="this.style.background='linear-gradient(135deg,#2a0a0a,#8b3a3a)'">
         <div class="split-label">Age 3</div>
       </div>
       <div class="split-divider"></div>
       <div class="split-side">
-        <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/Photo-4.jpg"
-             alt="Dristi now"
+        <img src="https://raw.githubusercontent.com/Ankit-officialll/15k-celebration/main/Photo-4.jpg" alt="Dristi now"
              style="object-position:right center"
              onerror="this.style.background='linear-gradient(135deg,#8b3a3a,#e8a0a0)'">
         <div class="split-label">Age 18</div>
@@ -518,233 +495,213 @@ body::after{
       <div class="hearts-row" id="hr"><span>🌸</span><span>🎂</span><span>🌸</span></div>
       <div class="fin-age" id="fage">18</div>
       <div class="fin-name" id="fname">Dristi</div>
-      <div class="fin-date" id="fdate">June 2 · 2026 · Happy Birthday ✦</div>
+      <div class="fin-date" id="fdate">June 2 · Forever Remembered</div>
     </div>
   </div>
 
 </div>
 
 <script>
-/* CURSOR */
-const cur=document.getElementById('cur'),crng=document.getElementById('cur-ring');
-let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+/* ── CURSOR ── */
+const cur = document.getElementById('cur');
+const curR = document.getElementById('cur-ring');
+let mx=window.innerWidth/2, my=window.innerHeight/2;
+let rx=mx,ry=my;
 document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
-(function lp(){rx+=(mx-rx)*.09;ry+=(my-ry)*.09;crng.style.left=rx+'px';crng.style.top=ry+'px';requestAnimationFrame(lp);})();
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;curR.style.left=rx+'px';curR.style.top=ry+'px';requestAnimationFrame(loop);})();
 
-/* PETALS */
+/* ── GALAXY CANVAS ── */
+const cvs=document.getElementById('galaxy');
+const ctx=cvs.getContext('2d');
+let W,H,stars=[];
+function resize(){W=cvs.width=window.innerWidth;H=cvs.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+function mkStars(){stars=[];for(let i=0;i<220;i++)stars.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*1.2+.2,a:Math.random(),s:Math.random()*.004+.001,p:Math.random()*Math.PI*2});}
+mkStars();
+function drawGalaxy(){
+  ctx.clearRect(0,0,W,H);
+  stars.forEach(s=>{
+    s.p+=s.s;s.a=.3+.5*Math.abs(Math.sin(s.p));
+    ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(232,160,160,${s.a})`;ctx.fill();
+  });
+  requestAnimationFrame(drawGalaxy);
+}
+drawGalaxy();
+
+/* ── PETALS ── */
 for(let i=0;i<18;i++){
-  const p=document.createElement('div');
-  p.className='petal';
-  p.style.cssText=`left:${Math.random()*100}%;top:${-20+Math.random()*-100}px;
-    animation-duration:${6+Math.random()*8}s;animation-delay:${Math.random()*10}s;
-    opacity:${0.1+Math.random()*0.2};transform:rotate(${Math.random()*360}deg);
-    width:${4+Math.random()*6}px;height:${7+Math.random()*10}px;`;
+  const p=document.createElement('div');p.className='petal';
+  p.style.left=Math.random()*100+'vw';
+  p.style.animationDuration=(6+Math.random()*10)+'s';
+  p.style.animationDelay=(-Math.random()*12)+'s';
+  p.style.opacity=Math.random()*.5+.1;
   document.body.appendChild(p);
 }
 
-/* GALAXY */
-const gc=document.getElementById('galaxy'),gx=gc.getContext('2d');
-gc.width=innerWidth;gc.height=innerHeight;
-window.addEventListener('resize',()=>{gc.width=innerWidth;gc.height=innerHeight;initStars();});
-let stars=[];
-function initStars(){
-  stars=Array.from({length:200},()=>({
-    x:Math.random()*gc.width,y:Math.random()*gc.height,
-    r:Math.random()*1.1+.1,o:Math.random()*.45+.05,
-    ts:Math.random()*.015+.005,to:Math.random()*Math.PI*2,
-    rose:Math.random()>.6
-  }));
-}
-initStars();
-let t=0;
-(function drawG(){
-  gx.clearRect(0,0,gc.width,gc.height);
-  const ng=gx.createRadialGradient(gc.width*.35,gc.height*.4,0,gc.width*.35,gc.height*.4,gc.width*.45);
-  ng.addColorStop(0,'rgba(232,160,160,0.02)');ng.addColorStop(1,'transparent');
-  gx.fillStyle=ng;gx.fillRect(0,0,gc.width,gc.height);
-  const ng2=gx.createRadialGradient(gc.width*.7,gc.height*.6,0,gc.width*.7,gc.height*.6,gc.width*.3);
-  ng2.addColorStop(0,'rgba(180,80,80,0.015)');ng2.addColorStop(1,'transparent');
-  gx.fillStyle=ng2;gx.fillRect(0,0,gc.width,gc.height);
-  t+=.008;
-  stars.forEach(s=>{
-    const tw=.5+.5*Math.sin(t*s.ts*100+s.to);
-    const ao=s.o*(0.3+0.7*tw);
-    gx.beginPath();gx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    gx.fillStyle=s.rose?`rgba(232,160,160,${ao})`:`rgba(240,232,232,${ao*0.5})`;
-    gx.fill();
-    if(s.r>.9&&tw>.8){
-      gx.strokeStyle=s.rose?`rgba(232,160,160,${ao*.35})`:`rgba(240,232,232,${ao*.2})`;
-      gx.lineWidth=.5;const len=s.r*3.5*tw;
-      gx.beginPath();gx.moveTo(s.x-len,s.y);gx.lineTo(s.x+len,s.y);gx.stroke();
-      gx.beginPath();gx.moveTo(s.x,s.y-len);gx.lineTo(s.x,s.y+len);gx.stroke();
-    }
-  });
-  requestAnimationFrame(drawG);
-})();
-
-/* CINEMATIC OPEN */
-setTimeout(()=>document.body.classList.add('open'),100);
-
-/* PANELS */
+/* ── PANELS & SCROLL ── */
 const panels=['p0','p1','p2','p3','p4'];
-let current=0,scrollLocked=false;
+const dots=document.querySelectorAll('.pdot');
+let cur_panel=0,locked=false;
 
 function showPanel(idx){
   panels.forEach((id,i)=>{
     const el=document.getElementById(id);
     el.classList.toggle('vis',i===idx);
   });
-  document.querySelectorAll('.pdot').forEach((d,i)=>d.classList.toggle('on',i===idx));
-  current=idx;
-  triggerPanel(idx);
+  dots.forEach((d,i)=>d.classList.toggle('on',i===idx));
+  animatePanel(idx);
 }
 
-function next(){if(current<panels.length-1){showPanel(current+1);lockScroll(1000);}}
-function prev(){if(current>0){showPanel(current-1);lockScroll(700);}}
-function lockScroll(ms){scrollLocked=true;setTimeout(()=>scrollLocked=false,ms);}
+function animatePanel(idx){
+  const gl=['gl0','gl1',null,'gl3','gl4'];
+  if(gl[idx]){setTimeout(()=>{const g=document.getElementById(gl[idx]);if(g)g.classList.add('on');},400);}
 
-function handleScroll(delta){
-  if(scrollLocked)return;
-  if(current===3){
-    const mt=document.getElementById('mt');
-    const atBottom=mt.scrollTop+mt.clientHeight>=mt.scrollHeight-4;
-    const atTop=mt.scrollTop<=0;
-    if(delta>0&&!atBottom)return;
-    if(delta<0&&!atTop)return;
+  if(idx===0){
+    setTimeout(()=>document.getElementById('ey0').classList.add('in'),200);
+    setTimeout(()=>document.getElementById('cw').classList.add('in'),400);
+    setTimeout(()=>document.getElementById('pw').classList.add('in'),500);
+    setTimeout(()=>document.getElementById('pname').classList.add('in'),700);
+    setTimeout(()=>document.getElementById('psub').classList.add('in'),1100);
+    setTimeout(()=>document.getElementById('bdg').classList.add('in'),1500);
+    setTimeout(()=>{const h=document.getElementById('scrollHint');h.classList.add('show');},2400);
   }
-  if(delta>0)next(); else prev();
+  if(idx===1){
+    document.getElementById('scrollHint').classList.remove('show');
+    setTimeout(()=>document.getElementById('chtitle').classList.add('in'),200);
+    setTimeout(()=>document.getElementById('chsub').classList.add('in'),400);
+    setTimeout(()=>{['cp1','cp2','cp3'].forEach(id=>document.getElementById(id).classList.add('in'));},600);
+    setTimeout(()=>document.getElementById('chcap').classList.add('in'),1200);
+  }
+  if(idx===2){
+    setTimeout(()=>document.getElementById('trtitle').classList.add('in'),200);
+    setTimeout(()=>document.getElementById('trh').classList.add('in'),400);
+    setTimeout(()=>document.getElementById('sw').classList.add('in'),600);
+    setTimeout(()=>document.getElementById('trmsg').classList.add('in'),1400);
+  }
+  if(idx===3){
+    setTimeout(()=>document.getElementById('mlbl').classList.add('in'),200);
+    setTimeout(()=>document.getElementById('lc').classList.add('in'),500);
+    setTimeout(()=>typeMsg(),900);
+  }
+  if(idx===4){
+    fireConfetti();
+    setTimeout(()=>document.getElementById('fl1').classList.add('in'),300);
+    setTimeout(()=>{const g=document.getElementById('gl4');if(g)g.classList.add('on');},700);
+    setTimeout(()=>document.getElementById('hr').classList.add('in'),900);
+    setTimeout(()=>document.getElementById('fage').classList.add('in'),1000);
+    setTimeout(()=>document.getElementById('fname').classList.add('in'),1400);
+    setTimeout(()=>document.getElementById('fdate').classList.add('in'),1800);
+    setTimeout(()=>fireConfetti(),2200);
+  }
 }
 
-window.addEventListener('wheel',e=>{e.preventDefault();handleScroll(e.deltaY);},{passive:false});
-let ts=0;
-window.addEventListener('touchstart',e=>{ts=e.touches[0].clientY;},{passive:true});
-window.addEventListener('touchend',e=>{const dy=ts-e.changedTouches[0].clientY;if(Math.abs(dy)>40)handleScroll(dy);},{passive:true});
+function navigate(dir){
+  if(locked)return;
+  const next=cur_panel+dir;
+  if(next<0||next>=panels.length)return;
+  locked=true;
+  cur_panel=next;
+  showPanel(cur_panel);
+  setTimeout(()=>locked=false,900);
+}
+
+/* wheel */
+let wAcc=0,wT;
+window.addEventListener('wheel',e=>{
+  wAcc+=e.deltaY;
+  clearTimeout(wT);
+  wT=setTimeout(()=>{
+    if(Math.abs(wAcc)>40)navigate(wAcc>0?1:-1);
+    wAcc=0;
+  },60);
+},{passive:true});
+
+/* touch */
+let ty0=null;
+window.addEventListener('touchstart',e=>ty0=e.touches[0].clientY,{passive:true});
+window.addEventListener('touchend',e=>{
+  if(ty0===null)return;
+  const dy=ty0-e.changedTouches[0].clientY;
+  if(Math.abs(dy)>40)navigate(dy>0?1:-1);
+  ty0=null;
+},{passive:true});
+
+/* keyboard */
 window.addEventListener('keydown',e=>{
-  if(e.key==='ArrowDown'||e.key==='ArrowRight')handleScroll(1);
-  if(e.key==='ArrowUp'||e.key==='ArrowLeft')handleScroll(-1);
+  if(e.key==='ArrowDown'||e.key==='PageDown')navigate(1);
+  if(e.key==='ArrowUp'||e.key==='PageUp')navigate(-1);
 });
 
-/* TRIGGER ANIMATIONS PER PANEL */
-const triggered=new Set();
-function triggerPanel(idx){
-  if(triggered.has(idx))return;
-  triggered.add(idx);
-  if(idx===0)initP0();
-  if(idx===1)initP1();
-  if(idx===2)initP2();
-  if(idx===3)initP3();
-  if(idx===4)initP4();
-}
+/* ── CINEMATIC OPEN ── */
+document.body.classList.add('open');
+setTimeout(()=>animatePanel(0),600);
 
-/* P0 */
-function initP0(){
-  setTimeout(()=>{
-    document.body.classList.add('open');
-    setTimeout(()=>{document.getElementById('ey0').classList.add('in');},600);
-    setTimeout(()=>{document.getElementById('cw').classList.add('in');},800);
-    setTimeout(()=>{document.getElementById('pw').classList.add('in');},900);
-    setTimeout(()=>{document.getElementById('pname').classList.add('in');},1100);
-    setTimeout(()=>{document.getElementById('psub').classList.add('in');},1500);
-    setTimeout(()=>{document.getElementById('gl0').classList.add('on');},1800);
-    setTimeout(()=>{document.getElementById('bdg').classList.add('in');},2000);
-    setTimeout(()=>{
-      document.getElementById('scrollHint').classList.add('show');
-    },2800);
-  },200);
-}
+/* ── TYPEWRITER MESSAGE ── */
+const MSG = `Happy Birthday, Dristi 🌸
 
-/* P1 */
-function initP1(){
-  setTimeout(()=>{document.getElementById('chtitle').classList.add('in');},200);
-  setTimeout(()=>{document.getElementById('gl1').classList.add('on');},400);
-  setTimeout(()=>{document.getElementById('chsub').classList.add('in');},500);
-  [1,2,3].forEach(n=>{
-    setTimeout(()=>{document.getElementById('cp'+n).classList.add('in');},600+n*200);
-  });
-  setTimeout(()=>{document.getElementById('chcap').classList.add('in');},1400);
-}
+Some people enter our lives quietly but end up becoming one of the most beautiful parts of it — and meeting you has truly been one of the best things that happened to me this year.
 
-/* P2 */
-function initP2(){
-  setTimeout(()=>{document.getElementById('trtitle').classList.add('in');},200);
-  setTimeout(()=>{document.getElementById('trh').classList.add('in');},400);
-  setTimeout(()=>{document.getElementById('sw').classList.add('in');},600);
-  setTimeout(()=>{document.getElementById('trmsg').classList.add('in');},1400);
-}
+You don't even realize how special you are and how naturally you leave an impact on people around you.
 
-/* P3 — TYPEWRITER */
-function initP3(){
-  setTimeout(()=>{document.getElementById('mlbl').classList.add('in');},200);
-  setTimeout(()=>{document.getElementById('gl3').classList.add('on');},400);
-  setTimeout(()=>{document.getElementById('lc').classList.add('in');},500);
-  
-  const msg = `Dear Dristi,
+May God always protect you from every pain, every sadness and every negativity. May your life always be filled with peace, endless happiness, love and success. You deserve every beautiful thing this world has to offer 🧿
 
-Today you turn a year older — and the world is a little more beautiful because of it.
+I've learned so many things from you — your kindness towards others, the way you care for people, and the respect you give to everyone really makes you different from the rest. Your dedication towards studies, your tiny little hate for maths 🤣 and your unconditional love for chemistry always make me smile.
 
-From a curious little girl in Nepal to a future doctor with a heart full of dreams, your journey has been nothing short of extraordinary.
+And honestly, your singing is genuinely amazing. The dream of learning guitar someday sounds so perfect for you too. You always try to act mature but somehow your childish side comes out in the cutest way possible — and trust me, that side of yours is truly precious.
 
-You carry within you the grace of the mountains, the warmth of the sun, and the strength of someone who knows exactly who she is.
+The way you get worried about hair fall or overthink about your dreams sometimes — don't stress so much, okay? You're definitely going to achieve a lot in life. You have people who genuinely love and support you — dada, mamu, father — their blessings and care will always protect you and give you strength 🧿
 
-On this day, may every wish you've whispered to the stars come true. May your path be lit with love, your days filled with laughter, and your story be one that the world remembers.
+Sometimes I wish I could know more about your childhood and the little stories of your life — but maybe some things are beautiful even when left incomplete.
 
-Happy Birthday, Dristi. 🌸`;
+Just stay the way you are — kind, caring, talented, emotional and beautifully imperfect.
 
+Happy Birthday once again, girl 🎂
+Keep shining, keep rocking and always stay happy and healthy.`;
+
+let twIdx=0,twTimer=null,twDone=false;
+function typeMsg(){
   const el=document.getElementById('mt');
-  let i=0;
-  const cursor=document.createElement('span');
-  cursor.className='tw-cur';
-  el.appendChild(cursor);
-  
-  setTimeout(()=>{
-    const iv=setInterval(()=>{
-      if(i>=msg.length){clearInterval(iv);cursor.remove();
+  el.innerHTML='<span class="tw-cur"></span>';
+  twIdx=0;twDone=false;
+  clearInterval(twTimer);
+  twTimer=setInterval(()=>{
+    if(twIdx>=MSG.length){
+      clearInterval(twTimer);twDone=true;
+      setTimeout(()=>{
         document.getElementById('msig').classList.add('in');
         document.getElementById('nudge').classList.add('in');
-        return;
-      }
-      const ch=msg[i++];
-      cursor.insertAdjacentText('beforebegin',ch);
-      el.scrollTop=el.scrollHeight;
-    },22);
-  },800);
+      },400);
+      return;
+    }
+    const chunk=MSG.slice(0,twIdx+1);
+    el.innerHTML=chunk.replace(/\n/g,'<br>')+'<span class="tw-cur"></span>';
+    el.scrollTop=el.scrollHeight;
+    twIdx++;
+  },18);
 }
 
-/* P4 — FINALE + CONFETTI */
-function initP4(){
-  setTimeout(()=>{document.getElementById('fl1').classList.add('in');},300);
-  setTimeout(()=>{document.getElementById('gl4').classList.add('on');},700);
-  setTimeout(()=>{document.getElementById('hr').classList.add('in');},900);
-  setTimeout(()=>{document.getElementById('fage').classList.add('in');},1100);
-  setTimeout(()=>{document.getElementById('fname').classList.add('in');},1700);
-  setTimeout(()=>{document.getElementById('fdate').classList.add('in');},2200);
-  
+/* tap to skip typewriter */
+document.getElementById('lc').addEventListener('click',()=>{
+  if(twDone)return;
+  clearInterval(twTimer);
+  const el=document.getElementById('mt');
+  el.innerHTML=MSG.replace(/\n/g,'<br>');
+  el.scrollTop=el.scrollHeight;
+  twDone=true;
   setTimeout(()=>{
-    launchConfetti();
-    setTimeout(launchConfetti,1500);
-    setTimeout(launchConfetti,3000);
-  },1600);
-}
+    document.getElementById('msig').classList.add('in');
+    document.getElementById('nudge').classList.add('in');
+  },200);
+});
 
-function launchConfetti(){
-  const colors=['#e8a0a0','#f5c8c8','#c9a84c','#f0d080','#ffffff','#ff9999'];
-  confetti({
-    particleCount:80,spread:80,origin:{y:.6},
-    colors,startVelocity:35,gravity:0.9,
-    shapes:['circle','square'],scalar:0.9
-  });
-  confetti({
-    particleCount:40,spread:120,origin:{y:.55,x:.2},
-    colors,startVelocity:28,angle:80
-  });
-  confetti({
-    particleCount:40,spread:120,origin:{y:.55,x:.8},
-    colors,startVelocity:28,angle:100
-  });
+/* ── CONFETTI ── */
+function fireConfetti(){
+  const opts={particleCount:120,spread:90,origin:{y:.55},colors:['#e8a0a0','#f5c8c8','#c9a84c','#f0d080','#8b3a3a','#ffffff']};
+  confetti({...opts,angle:60,origin:{x:.1,y:.6}});
+  setTimeout(()=>confetti({...opts,angle:120,origin:{x:.9,y:.6}}),300);
+  setTimeout(()=>confetti({...opts,angle:90,origin:{x:.5,y:.5},particleCount:80}),600);
 }
-
-/* Start P0 */
-setTimeout(()=>triggerPanel(0),300);
 </script>
 </body>
 </html>
